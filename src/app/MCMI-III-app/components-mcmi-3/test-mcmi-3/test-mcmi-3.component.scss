@@ -1,0 +1,50 @@
+@use "../../../../../node_modules/@angular/material/index" as mat;
+
+.mcmi-3-test-header-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.mcmi-3-test-stepper {
+  @include mat.stepper-overrides(
+    (
+      header-focus-state-layer-shape: 20px,
+      header-hover-state-layer-shape: 20px,
+    )
+  );
+  padding: 20px;
+  background-color: whitesmoke;
+  .mcmi-3-test-answers-grid {
+    padding-top: 20px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    grid-template-columns: repeat(auto-fill, 100px);
+    .mat-button-toggle {
+      @include mat.button-toggle-overrides(
+        (
+          label-text-size: 30px,
+          selected-state-text-color: white,
+          selected-state-background-color: #1976d2,
+        )
+      );
+    }
+  }
+  .mcmi-3-test-action-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  .mcmi-3-test-finished-action-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 80vh;
+  }
+}

@@ -1,0 +1,67 @@
+<div *ngIf="testMcmi3Service.startTest && !testMcmi3Service.results">
+    <div class="mcmi-3-test-header-btns">
+        <button mat-button (click)="testMcmi3Service.reset(); callMcmi3Btn()"><mat-icon
+                fontIcon="close"></mat-icon>Închide</button>
+        <div>MCMI-III / TEST / {{ testMcmi3Service.name }}</div>
+    </div>
+    <mat-stepper class="mcmi-3-test-stepper">
+        <mat-step label="1-70">
+            <div class="mcmi-3-test-answers-grid">
+                <div *ngFor="let key of answersMcmi3Service.answerKeys | slice:0:70; let i = index">
+                    <p>{{ i + 1 }}:</p>
+                    <mat-button-toggle-group class="mat-button-toggle" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="answersMcmi3Service.updateAnswer(key, 'A')">A</mat-button-toggle>
+                        <mat-button-toggle (click)="answersMcmi3Service.updateAnswer(key, 'F')">F</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+
+            <div class="mcmi-3-test-action-btns">
+                <button mat-button matStepperNext>Continuă</button>
+            </div>
+        </mat-step>
+        <mat-step label="71-140">
+            <div class="mcmi-3-test-answers-grid">
+                <div *ngFor="let key of answersMcmi3Service.answerKeys | slice:70:140; let i = index">
+                    <p>{{ i + 71 }}:</p>
+                    <mat-button-toggle-group class="mat-button-toggle" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="answersMcmi3Service.updateAnswer(key, 'A')">A</mat-button-toggle>
+                        <mat-button-toggle (click)="answersMcmi3Service.updateAnswer(key, 'F')">F</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+
+            <div class="mcmi-3-test-action-btns">
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-button matStepperNext>Continuă</button>
+            </div>
+        </mat-step>
+        <mat-step label="141-175">
+            <div class="mcmi-3-test-answers-grid">
+                <div *ngFor="let key of answersMcmi3Service.answerKeys | slice:140:175; let i = index">
+                    <p>{{ i + 141 }}:</p>
+                    <mat-button-toggle-group class="mat-button-toggle" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="answersMcmi3Service.updateAnswer(key, 'A')">A</mat-button-toggle>
+                        <mat-button-toggle (click)="answersMcmi3Service.updateAnswer(key, 'F')">F</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+
+            <div class="mcmi-3-test-action-btns">
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-button matStepperNext>Continuă</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>
+                <mat-icon fontIcon="done_all"></mat-icon>
+            </ng-template>
+            <div class="mcmi-3-test-finished-action-btns">
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-flat-button
+                    (click)="testMcmi3Service.calculateScoresBtn(); pdfDownloadMcmi3Service.downloadPDFs()">Claculează
+                    scorurile</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

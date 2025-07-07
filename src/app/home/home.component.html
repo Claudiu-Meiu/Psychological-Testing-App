@@ -1,0 +1,12 @@
+<div class="home-wrapper" *ngIf="!isMaciBtnClicked && !isMcmi3BtnClicked">
+    <div class="home-maci-card" (click)="maciBtn()" matRipple>
+        <div class="home-maci-card-title">MACI</div><mat-icon class="home-maci-card-icon" fontIcon="launch"></mat-icon>
+    </div>
+    <div class="home-mcmi-3-card" (click)="mcmi3Btn()" matRipple>
+        <div class="home-mcmi-3-card-title">MCMI-III</div><mat-icon class="home-mcmi-3-card-icon"
+            fontIcon="launch"></mat-icon>
+    </div>
+</div>
+
+<app-main-maci *ngIf="isMaciBtnClicked" [maciBtn]="maciBtn"></app-main-maci>
+<app-main-mcmi-3 *ngIf="isMcmi3BtnClicked" [mcmi3Btn]="mcmi3Btn"></app-main-mcmi-3>

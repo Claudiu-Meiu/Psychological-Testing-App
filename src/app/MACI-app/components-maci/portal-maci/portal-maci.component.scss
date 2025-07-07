@@ -1,0 +1,25 @@
+.maci-portal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    height: 100vh;
+    .maci-portal-header {
+      text-align: center;
+    }
+    .maci-portal-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      .maci-portal-form-inputs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 25px;
+      }
+    }
+  }
+  

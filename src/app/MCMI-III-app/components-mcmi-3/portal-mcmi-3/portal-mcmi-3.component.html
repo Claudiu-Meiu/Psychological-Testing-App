@@ -1,0 +1,30 @@
+<div class="mcmi-3-portal" *ngIf="!testMcmi3Service.startTest">
+    <button mat-button (click)="testMcmi3Service.reset(); callMcmi3Btn()"><mat-icon fontIcon="close"></mat-icon>
+        Închide</button>
+    <header class="mcmi-3-portal-header">
+        <h1>MCMI-III
+            <h6>Testare și Scorare</h6>
+        </h1>
+    </header>
+    <form class="mcmi-3-portal-form" (ngSubmit)="onSubmit()" #mcmi3portalForm="ngForm">
+        <div class="mcmi-3-portal-form-inputs">
+            <mat-form-field [(ngModel)]="testMcmi3Service.gender" name="gender" appearance="outline">
+                <mat-label>Gen</mat-label>
+                <mat-select required>
+                    <mat-option [value]="testMcmi3Service.gender"
+                        (click)="testMcmi3Service.isMaleBtn()">Masculin</mat-option>
+                    <mat-option [value]="testMcmi3Service.gender"
+                        (click)="testMcmi3Service.isFemaleBtn()">Feminin</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Nume și Prenume</mat-label>
+                <input matInput required [(ngModel)]="testMcmi3Service.name" name="name"
+                    [disabled]="!testMcmi3Service.gender" />
+            </mat-form-field>
+        </div>
+        <button mat-flat-button type="submit" [disabled]="!mcmi3portalForm.valid || !testMcmi3Service.gender">Începe
+            testul</button>
+    </form>
+</div>

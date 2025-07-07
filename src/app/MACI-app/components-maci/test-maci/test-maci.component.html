@@ -1,0 +1,67 @@
+<div *ngIf="testMaciService.startTest && !testMaciService.results">
+    <div class="maci-test-header-btns">
+        <button mat-button (click)="testMaciService.reset(); callMaciBtn()"><mat-icon
+                fontIcon="close"></mat-icon>Închide</button>
+        <div>MACI / TEST / {{ testMaciService.name }} - {{ testMaciService.age }} ani</div>
+    </div>
+    <mat-stepper class="maci-test-stepper">
+        <mat-step label="1-60">
+            <div class="maci-test-answers-grid">
+                <div *ngFor="let key of answersMaci.answerKeys | slice:0:60; let i = index">
+                    <p>{{ i + 1 }}:</p>
+                    <mat-button-toggle-group class="mat-button-toggle" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="answersMaci.updateAnswer(key, 'A')">A</mat-button-toggle>
+                        <mat-button-toggle (click)="answersMaci.updateAnswer(key, 'F')">F</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+
+            <div class="maci-test-action-btns">
+                <button mat-button matStepperNext>Continuă</button>
+            </div>
+        </mat-step>
+        <mat-step label="61-120">
+            <div class="maci-test-answers-grid">
+                <div *ngFor="let key of answersMaci.answerKeys | slice:60:120; let i = index">
+                    <p>{{ i + 61 }}:</p>
+                    <mat-button-toggle-group class="mat-button-toggle" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="answersMaci.updateAnswer(key, 'A')">A</mat-button-toggle>
+                        <mat-button-toggle (click)="answersMaci.updateAnswer(key, 'F')">F</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+
+            <div class="maci-test-action-btns">
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-button matStepperNext>Continuă</button>
+            </div>
+        </mat-step>
+        <mat-step label="121-160">
+            <div class="maci-test-answers-grid">
+                <div *ngFor="let key of answersMaci.answerKeys | slice:120:160; let i = index">
+                    <p>{{ i + 121 }}:</p>
+                    <mat-button-toggle-group class="mat-button-toggle" [hideSingleSelectionIndicator]="true">
+                        <mat-button-toggle (click)="answersMaci.updateAnswer(key, 'A')">A</mat-button-toggle>
+                        <mat-button-toggle (click)="answersMaci.updateAnswer(key, 'F')">F</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </div>
+
+            <div class="maci-test-action-btns">
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-button matStepperNext>Continuă</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>
+                <mat-icon fontIcon="done_all"></mat-icon>
+            </ng-template>
+            <div class="maci-test-finished-action-btns">
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-flat-button
+                    (click)="testMaciService.calculateScoresBtn(); pdfDownloadMaciService.downloadPDFs()">Claculează
+                    scorurile</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

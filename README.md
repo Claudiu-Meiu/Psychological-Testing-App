@@ -17,4 +17,4 @@ To package the Angular application with Electron, you can use the following comm
 
 To package for both Windows and Linux at once: `npm run package:all`
 
-Once the packaging process is complete, you can find the executable files in the release-builds directory. This directory contains the packaged applications that you can distribute and run on your systems.
+Once the packaging process is complete, you can find the executable files in the `release-builds` directory. This directory contains the packaged applications that you can distribute and run on your systems.

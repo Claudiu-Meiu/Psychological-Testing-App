@@ -1,44 +1,136 @@
-<div class="maci-portal" *ngIf="!testMaciService.startTest">
-    <button mat-button (click)="testMaciService.reset(); callMaciBtn()"><mat-icon fontIcon="close"></mat-icon>
-        Închide</button>
-    <header class="maci-portal-header">
-        <h1>MACI
-            <h6>Testare și Scorare</h6>
-        </h1>
-    </header>
-    <form class="maci-portal-form" (ngSubmit)="onSubmit()" #maciPortalForm="ngForm">
-        <div class="maci-portal-form-inputs">
-            <mat-form-field [(ngModel)]="testMaciService.gender" name="gender" appearance="outline">
-                <mat-label>Gen</mat-label>
-                <mat-select required>
-                    <mat-option [value]="testMaciService.gender"
-                        (click)="testMaciService.isMaleBtn()">Masculin</mat-option>
-                    <mat-option [value]="testMaciService.gender"
-                        (click)="testMaciService.isFemaleBtn()">Feminin</mat-option>
-                </mat-select>
-            </mat-form-field>
+<mat-tab-group dynamicHeight>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div class="flex items-center gap-2">
+                <mat-icon class="example-tab-icon">assignment</mat-icon>
 
-            <mat-form-field [(ngModel)]="testMaciService.age" name="age" appearance="outline">
-                <mat-label>Vârstă</mat-label>
-                <mat-select required>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(13)">13</mat-option>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(14)">14</mat-option>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(15)">15</mat-option>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(16)">16</mat-option>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(17)">17</mat-option>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(18)">18</mat-option>
-                    <mat-option [value]="testMaciService.age" (click)="testMaciService.setAge(19)">19</mat-option>
-                </mat-select>
-            </mat-form-field>
+                <header>MACI</header>
+            </div>
+        </ng-template>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Nume și Prenume</mat-label>
-                <input matInput required [(ngModel)]="testMaciService.name" name="name"
-                    [disabled]="!testMaciService.gender || !testMaciService.age" />
-            </mat-form-field>
+        <div class="flex flex-col items-center gap-2 mt-40 max-md:mt-20 w-3/5 m-auto">
+            <div class="flex flex-col items-center gap-15">
+                <div class="flex flex-col items-center">
+                    <header class="text-6xl">MACI</header>
+                    <header class="text-2xl">Testare și Scorare</header>
+                </div>
+
+                <form class="flex flex-col items-center gap-5" (ngSubmit)="onSubmit()" #maciPortalForm="ngForm">
+                    <div class="flex max-md:flex-col items-center gap-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Gen</mat-label>
+                            <mat-select [(ngModel)]="clientMaciService.genderValue" name="gender"
+                                (selectionChange)="clientMaciService.setGender($event.value)" required>
+                                <mat-option [value]="'Masculin'">Masculin</mat-option>
+                                <mat-option [value]="'Feminin'">Feminin</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Vârstă</mat-label>
+                            <mat-select [(ngModel)]="clientMaciService.ageValue" name="age"
+                                (selectionChange)="clientMaciService.setAge($event.value)" required>
+                                <mat-option *ngFor="let age of [13, 14, 15, 16, 17, 18, 19]" [value]="age">{{ age
+                                    }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nume și Prenume</mat-label>
+                            <input matInput [(ngModel)]="clientMaciService.nameValue" name="name"
+                                [disabled]="!clientMaciService.genderValue || !clientMaciService.ageValue" required />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button mat-button (click)="exitPortal()" type="button">
+                            <mat-icon>close</mat-icon>Închide
+                        </button>
+
+                        <button mat-flat-button type="submit"
+                            [disabled]="!maciPortalForm.valid || !clientMaciService.genderValue || !clientMaciService.ageValue">Începe
+                            testul</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <button mat-flat-button type="submit"
-            [disabled]="!maciPortalForm.valid || !testMaciService.gender || !testMaciService.age">Începe
-            testul</button>
-    </form>
-</div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div class="flex items-center gap-2">
+                <mat-icon class="example-tab-icon">group_search</mat-icon>
+
+                <header>Clienți</header>
+            </div>
+        </ng-template>
+
+        <div class="mt-20 w-3/5 max-md:w-full m-auto">
+            <div class="flex flex-col gap-4 items-start w-full">
+                <mat-form-field appearance="outline">
+                    <mat-label>Filtrează</mat-label>
+
+                    <input matInput (keyup)="applyMaciTableFilter($event)" placeholder="Ex. 'nume'" #input>
+
+                    <mat-icon matIconSuffix matTooltip="Filtreză clienții">search</mat-icon>
+                </mat-form-field>
+
+                <table mat-table [dataSource]="allMaciClients" matSort>
+                    <!-- Delete client Column -->
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let client">
+                            <button mat-icon-button (click)="openDeleteMaciClientDialog(client,'0ms', '0ms')"
+                                matTooltip="Șterge client"><mat-icon fontIcon="delete_forever"></mat-icon></button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după nume">Nume</th>
+                        <td mat-cell *matCellDef="let client">{{ client.name }}</td>
+                    </ng-container>
+
+                    <!-- Gender Column -->
+                    <ng-container matColumnDef="gender">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după gen">Gen</th>
+                        <td mat-cell *matCellDef="let client">{{ client.gender }}</td>
+                    </ng-container>
+
+                    <!-- Age Column -->
+                    <ng-container matColumnDef="age">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după vârstă">Vârstă
+                        </th>
+                        <td mat-cell *matCellDef="let client">{{ client.age }} ani</td>
+                    </ng-container>
+
+                    <!-- Select client Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let client" class="text-right!">
+                            <button mat-button (click)="selectClient(client); viewAnswers()"><mat-icon
+                                    fontIcon="assignment"></mat-icon>Răspunsuri</button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Results Column -->
+                    <ng-container matColumnDef="results">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let client" class="text-right!">
+                            <button mat-button *ngIf="client.scores.length !== 0"
+                                (click)="selectClient(client); viewResults()"><mat-icon
+                                    fontIcon="calculate"></mat-icon>Scoruri</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedMaciTableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedMaciTableColumns;" class="hover:bg-zinc-100!">
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

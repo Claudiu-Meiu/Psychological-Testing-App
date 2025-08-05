@@ -18,3 +18,11 @@ To package the Angular application with Electron, you can use the following comm
 To package for both Windows and Linux at once: `npm run package:all`
 
 Once the packaging process is complete, you can find the executable files in the `release-builds` directory. This directory contains the packaged applications that you can distribute and run on your systems.
+
+## Windows Installer
+
+For Windows users, there is an installer available that simplifies the setup process. The installer includes options to install the necessary dependencies, such as Node.js and MongoDB.
+
+## Running the Server After Cloning
+
+If you clone the project instead of using the installer, you will need to manually install Node.js and MongoDB on your system. After installing these dependencies, you can start the server by running the following command in the console: `npm run server`

@@ -1,50 +1,12 @@
 @use "../../../../../node_modules/@angular/material/index" as mat;
 
-.maci-test-header-btns {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  gap: 20px;
-}
-
-.maci-test-stepper {
-  @include mat.stepper-overrides(
+.maci-test-mat-button-toggle {
+  @include mat.button-toggle-overrides(
     (
-      header-focus-state-layer-shape: 20px,
-      header-hover-state-layer-shape: 20px,
+      shape: 5px,
+      label-text-size: 30px,
+      selected-state-text-color: #1976d2,
+      selected-state-background-color: #1976d224,
     )
   );
-  padding: 20px;
-  background-color: whitesmoke;
-  .maci-test-answers-grid {
-    padding-top: 20px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    grid-template-columns: repeat(auto-fill, 100px);
-    .mat-button-toggle {
-      @include mat.button-toggle-overrides(
-        (
-          label-text-size: 30px,
-          selected-state-text-color: white,
-          selected-state-background-color: #1976d2,
-        )
-      );
-    }
-  }
-  .maci-test-action-btns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-  }
-  .maci-test-finished-action-btns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    height: 80vh;
-  }
 }

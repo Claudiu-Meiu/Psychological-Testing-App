@@ -1,165 +1,48 @@
-<div *ngIf="testMaciService.results">
-    <div class="maci-results-header-btns">
-        <button mat-button (click)="testMaciService.reset(); callMaciBtn()"><mat-icon
-                fontIcon="close"></mat-icon>Închide</button>
-        <div>MACI / SCORURI / {{ testMaciService.name }} - {{ testMaciService.age }} ani</div>
+<div *ngIf="selectedClient && selectedClient.scores">
+    <div class="flex items-center justify-center gap-4 p-4 flex-wrap">
+        <button mat-button (click)="goBackToAnswers()">
+            Înapoi</button>
+
+        <button mat-button (click)="exitResults()"><mat-icon>close</mat-icon>
+            Închide</button>
+
+        <div>MACI / Scoruri / {{ selectedClient.name }}</div>
     </div>
-    <div class="maci-results-final-btns">
-        <button mat-button (click)="pdfDownloadMaciService.downloadPDFs()"><mat-icon fontIcon="download"></mat-icon>
-            Descarcă din nou</button>
-        <button mat-flat-button (click)="testMaciService.reset()">Începe
-            un test nou</button>
-    </div>
-    <div class="maci-results">
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleX'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleXGrossRounded }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleXBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleY'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleYGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleYBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleZ'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleZGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleZBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale1'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale1Gross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale1BR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale2A'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale2AGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale2ABR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale2B'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale2BGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale2BBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale3'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale3Gross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale3BR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale4'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale4Gross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale4BR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale5'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale5Gross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale5BR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale6A'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale6AGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale6ABR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale6B'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale6BGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale6BBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale7'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale7Gross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale7BR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale8A'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale8AGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale8ABR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale8B'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale8BGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale8BBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scale9'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScale9Gross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScale9BR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleA'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleAGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleABR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleB'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleBGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleBBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleC'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleCGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleCBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleD'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleDGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleDBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleE'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleEGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleEBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleF'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleFGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleFBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleG'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleGGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleGBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleH'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleHGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleHBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleAA'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleAAGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleAABR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleBB'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleBBGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleBBBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleCC'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleCCGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleCCBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleDD'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleDDGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleDDBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleEE'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleEEGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleEEBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleFF'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleFFGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleFFBR }}</b></p>
-        </div>
-        <div class="maci-results-scale">
-            <h5>{{ testMaciService.tableReferenceMaciService.Titles['scaleGG'] }}</h5>
-            <p>Scor brut: {{ testMaciService.resultScaleGGGross }}</p>
-            <p>Scor BR: <b class="maci-results-br">{{ testMaciService.resultScaleGGBR }}</b></p>
+
+    <div class="mt-20 mb-20 w-3/5 max-md:w-full m-auto">
+        <div class="flex flex-col gap-4 items-start w-full">
+            <mat-form-field appearance="outline">
+                <mat-label>Filtrează</mat-label>
+
+                <input matInput (keyup)="applyMaciResultsTableFilter($event)" placeholder="Ex. 'scala x'" #input>
+
+                <mat-icon matIconSuffix matTooltip="Filtreză scorurile">search</mat-icon>
+            </mat-form-field>
+
+            <table mat-table [dataSource]="maciResults" matSort>
+                <!-- Scale Column -->
+                <ng-container matColumnDef="scale">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după scală">Scala</th>
+                    <td mat-cell *matCellDef="let element">{{element.scale}}</td>
+                </ng-container>
+
+                <!-- Gross Column -->
+                <ng-container matColumnDef="gross">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după scor brut">Scor brut
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.gross}}</td>
+                </ng-container>
+
+                <!-- BR Column -->
+                <ng-container matColumnDef="br">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după scor BR">Scor BR
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="text-material-blue font-bold">{{element.br}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedMaciResultsTableColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedMaciResultsTableColumns;" class="hover:bg-zinc-100!">
+                </tr>
+            </table>
         </div>
     </div>
-</div>

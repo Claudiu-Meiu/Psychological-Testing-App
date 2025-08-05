@@ -1,0 +1,8 @@
+<header mat-dialog-title>Șterge Client</header>
+<mat-dialog-content>
+    Doești să ștergi clientul cu numele <b>{{ data.client.name }}</b>?
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Nu</button>
+    <button mat-button (click)="confirmDelete()" cdkFocusInitial>Da</button>
+</mat-dialog-actions>

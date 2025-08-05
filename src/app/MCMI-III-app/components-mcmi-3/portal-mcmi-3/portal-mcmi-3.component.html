@@ -1,30 +1,119 @@
-<div class="mcmi-3-portal" *ngIf="!testMcmi3Service.startTest">
-    <button mat-button (click)="testMcmi3Service.reset(); callMcmi3Btn()"><mat-icon fontIcon="close"></mat-icon>
-        Închide</button>
-    <header class="mcmi-3-portal-header">
-        <h1>MCMI-III
-            <h6>Testare și Scorare</h6>
-        </h1>
-    </header>
-    <form class="mcmi-3-portal-form" (ngSubmit)="onSubmit()" #mcmi3portalForm="ngForm">
-        <div class="mcmi-3-portal-form-inputs">
-            <mat-form-field [(ngModel)]="testMcmi3Service.gender" name="gender" appearance="outline">
-                <mat-label>Gen</mat-label>
-                <mat-select required>
-                    <mat-option [value]="testMcmi3Service.gender"
-                        (click)="testMcmi3Service.isMaleBtn()">Masculin</mat-option>
-                    <mat-option [value]="testMcmi3Service.gender"
-                        (click)="testMcmi3Service.isFemaleBtn()">Feminin</mat-option>
-                </mat-select>
-            </mat-form-field>
+<mat-tab-group dynamicHeight>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div class="flex items-center gap-2">
+                <mat-icon class="example-tab-icon">assignment</mat-icon>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Nume și Prenume</mat-label>
-                <input matInput required [(ngModel)]="testMcmi3Service.name" name="name"
-                    [disabled]="!testMcmi3Service.gender" />
-            </mat-form-field>
+                <header>MCMI-III</header>
+            </div>
+        </ng-template>
+
+        <div class="flex flex-col items-center gap-2 mt-40 max-md:mt-20 w-3/5 m-auto">
+            <div class="flex flex-col items-center gap-15">
+                <div class="flex flex-col items-center">
+                    <header class="text-6xl">MCMI-III</header>
+                    <header class="text-2xl">Testare și Scorare</header>
+                </div>
+
+                <form class="flex flex-col items-center gap-5" (ngSubmit)="onSubmit()" #mcmi3portalForm="ngForm">
+                    <div class="flex max-md:flex-col items-center gap-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Gen</mat-label>
+                            <mat-select [(ngModel)]="clientMcmi3Service.genderValue" name="gender"
+                                (selectionChange)="clientMcmi3Service.setGender($event.value)" required>
+                                <mat-option [value]="'Masculin'">Masculin</mat-option>
+                                <mat-option [value]="'Feminin'">Feminin</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nume și Prenume</mat-label>
+                            <input matInput type="text" [(ngModel)]="clientMcmi3Service.nameValue" name="name"
+                                [disabled]="!clientMcmi3Service.genderValue" required />
+                        </mat-form-field>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button mat-button type="button" (click)="exitPortal()"><mat-icon>close</mat-icon>
+                            Închide</button>
+
+                        <button mat-flat-button type="submit"
+                            [disabled]="!mcmi3portalForm.valid || !clientMcmi3Service.genderValue">Începe
+                            testul</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <button mat-flat-button type="submit" [disabled]="!mcmi3portalForm.valid || !testMcmi3Service.gender">Începe
-            testul</button>
-    </form>
-</div>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div class="flex items-center gap-2">
+                <mat-icon class="example-tab-icon">group_search</mat-icon>
+
+                <header>Clienți</header>
+            </div>
+        </ng-template>
+
+        <div class="mt-20 w-3/5 max-md:w-full m-auto">
+            <div class="flex flex-col gap-4 items-start w-full">
+                <mat-form-field appearance="outline">
+                    <mat-label>Filtrează</mat-label>
+
+                    <input matInput (keyup)="applyMcmi3TableFilter($event)" placeholder="Ex. 'nume'" #input>
+
+                    <mat-icon matIconSuffix matTooltip="Filtreză clienții">search</mat-icon>
+                </mat-form-field>
+
+                <table mat-table [dataSource]="allMcmi3Clients" matSort>
+                    <!-- Delete client Column -->
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let client">
+                            <button mat-icon-button (click)="openDeleteMcmi3ClientDialog(client,'0ms', '0ms')"
+                                matTooltip="Șterge client"><mat-icon fontIcon="delete_forever"></mat-icon></button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după nume">Nume</th>
+                        <td mat-cell *matCellDef="let client">{{ client.name }}</td>
+                    </ng-container>
+
+                    <!-- Gender Column -->
+                    <ng-container matColumnDef="gender">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după gen">Gen</th>
+                        <td mat-cell *matCellDef="let client">{{ client.gender }}</td>
+                    </ng-container>
+
+                    <!-- Select client Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let client" class="text-right!">
+                            <button mat-button (click)="selectClient(client); viewAnswers()"><mat-icon
+                                    fontIcon="assignment"></mat-icon>Răspunsuri</button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Results Column -->
+                    <ng-container matColumnDef="results">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let client" class="text-right!">
+                            <button mat-button *ngIf="client.scores.length !== 0"
+                                (click)="selectClient(client); viewResults()"><mat-icon
+                                    fontIcon="calculate"></mat-icon>Scoruri</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedMcmi3TableColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedMcmi3TableColumns;" class="hover:bg-zinc-100!">
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" aria-label="Select page">
+                </mat-paginator>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

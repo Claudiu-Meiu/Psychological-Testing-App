@@ -2,7 +2,7 @@
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to [http://localhost:4200/](http://localhost:4200/). The application will automatically reload if you change any of the source files.
 
 ## Build
 
@@ -26,3 +26,8 @@ For Windows users, there is an installer available that simplifies the setup pro
 ## Running the Server After Cloning
 
 If you clone the project instead of using the installer, you will need to manually install Node.js and MongoDB on your system. After installing these dependencies, you can start the server by running the following command in the console: `npm run server`
+
+For downloading the necessary dependencies, visit the following links:
+
+- [Download Node.js](https://nodejs.org/en/download/)
+- [Download MongoDB](https://www.mongodb.com/try/download/community)

@@ -1,7 +1,7 @@
 <div *ngIf="selectedClient">
-    <div class="flex items-center justify-center gap-4 p-4 flex-wrap">
+    <div class="flex items-center justify-center gap-4 flex-wrap">
         <button mat-button (click)="exitTest()"><mat-icon>close</mat-icon>Închide</button>
-        <div>MACI / Testare / {{ selectedClient.name }}</div>
+        <div>MACI / Testare / {{ selectedClient.name }} - {{ selectedClient.date | date: 'dd.MM.yyyy' }}</div>
     </div>
 
     <mat-stepper class="bg-zinc-50! mt-10">

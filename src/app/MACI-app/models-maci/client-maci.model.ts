@@ -1,5 +1,6 @@
 export interface ClientMaci {
   _id?: string;
+  date: Date;
   gender: string;
   age: number;
   name: string;

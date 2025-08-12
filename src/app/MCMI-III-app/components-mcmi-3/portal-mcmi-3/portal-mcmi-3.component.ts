@@ -87,8 +87,8 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
     'delete',
     'name',
     'gender',
-    'select',
-    'results',
+    'date',
+    'answers-scores',
   ];
 
   ngOnInit(): void {
@@ -120,6 +120,7 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
 
   private _addMcmi3Client(): void {
     const newClient: ClientMcmi3 = {
+      date: new Date(),
       gender: this.clientMcmi3Service.genderValue,
       name: this.clientMcmi3Service.nameValue,
       answers: this._answersMcmi3Service.generateEmptyAnswersObjectMcmi3(),

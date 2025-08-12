@@ -1,3 +1,9 @@
+<div class="flex items-center justify-center">
+    <button mat-button (click)="exitPortal()" type="button">
+        <mat-icon>close</mat-icon>Închide
+    </button>
+</div>
+
 <mat-tab-group dynamicHeight>
     <mat-tab>
         <ng-template mat-tab-label>
@@ -43,9 +49,7 @@
                     </div>
 
                     <div class="flex items-center gap-4">
-                        <button mat-button (click)="exitPortal()" type="button">
-                            <mat-icon>close</mat-icon>Închide
-                        </button>
+
 
                         <button mat-flat-button type="submit"
                             [disabled]="!maciPortalForm.valid || !clientMaciService.genderValue || !clientMaciService.ageValue">Începe
@@ -65,7 +69,7 @@
             </div>
         </ng-template>
 
-        <div class="mt-20 w-3/5 max-md:w-full m-auto">
+        <div class="mt-20 w-4/5 max-md:w-full m-auto">
             <div class="flex flex-col gap-4 items-start w-full">
                 <mat-form-field appearance="outline">
                     <mat-label>Filtrează</mat-label>
@@ -104,22 +108,23 @@
                         <td mat-cell *matCellDef="let client">{{ client.age }} ani</td>
                     </ng-container>
 
-                    <!-- Select client Column -->
-                    <ng-container matColumnDef="select">
-                        <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef="let client" class="text-right!">
-                            <button mat-button (click)="selectClient(client); viewAnswers()"><mat-icon
-                                    fontIcon="assignment"></mat-icon>Răspunsuri</button>
-                        </td>
+                    <!-- Date Column -->
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după dată">Dată</th>
+                        <td mat-cell *matCellDef="let client">{{ client.date | date: 'dd.MM.yyyy' }}</td>
                     </ng-container>
 
-                    <!-- Results Column -->
-                    <ng-container matColumnDef="results">
+                    <!-- Answers / Scores Column -->
+                    <ng-container matColumnDef="answers-scores">
                         <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef="let client" class="text-right!">
-                            <button mat-button *ngIf="client.scores.length !== 0"
-                                (click)="selectClient(client); viewResults()"><mat-icon
-                                    fontIcon="calculate"></mat-icon>Scoruri</button>
+                        <td mat-cell *matCellDef="let client">
+                            <div class="flex items-center gap-2 justify-end">
+                                <button mat-button
+                                    (click)="selectClient(client); viewAnswers()"><mat-icon>assignment</mat-icon>Răspunsuri</button>
+
+                                <button mat-button *ngIf="client.scores.length !== 0"
+                                    (click)="selectClient(client); viewResults()"><mat-icon>assignment_turned_in</mat-icon>Scoruri</button>
+                            </div>
                         </td>
                     </ng-container>
 

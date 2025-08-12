@@ -1,12 +1,12 @@
 <div *ngIf="selectedClient && selectedClient.scores">
-    <div class="flex items-center justify-center gap-4 p-4 flex-wrap">
-        <button mat-button (click)="goBackToAnswers()">
-            Înapoi</button>
-
+    <div class="flex items-center justify-center gap-4 flex-wrap">
         <button mat-button (click)="exitResults()"><mat-icon>close</mat-icon>
             Închide</button>
 
-        <div>MCMI-III / Scoruri / {{ selectedClient.name }}</div>
+        <button mat-button (click)="goBackToAnswers()">
+            Înapoi la răspunsuri</button>
+
+        <div>MCMI-III / Scoruri / {{ selectedClient.name }} - {{ selectedClient.date | date: 'dd.MM.yyyy' }}</div>
     </div>
 
     <div class="mt-20 mb-20 w-3/5 max-md:w-full m-auto">

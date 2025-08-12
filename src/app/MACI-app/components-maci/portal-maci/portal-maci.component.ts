@@ -88,8 +88,8 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
     'name',
     'gender',
     'age',
-    'select',
-    'results',
+    'date',
+    'answers-scores',
   ];
 
   ngOnInit(): void {
@@ -119,6 +119,7 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
 
   private _addMaciClient(): void {
     const newClient: ClientMaci = {
+      date: new Date(),
       gender: this.clientMaciService.genderValue,
       name: this.clientMaciService.nameValue,
       age: this.clientMaciService.ageValue,

@@ -35,6 +35,10 @@ const ScoreSchema = new mongoose.Schema({
 });
 
 const MaciClientSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    required: true,
+  },
   gender: {
     type: String,
     required: true,
@@ -58,6 +62,10 @@ const MaciClientSchema = new mongoose.Schema({
 });
 
 const Mcmi3ClientSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    required: true,
+  },
   gender: {
     type: String,
     required: true,

@@ -114,7 +114,9 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
     this._mongoDbMcmi3Service
       .getClients()
       .subscribe((clients: ClientMcmi3[]) => {
-        this.allMcmi3Clients.data = clients;
+        this.allMcmi3Clients.data = clients.sort((a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
       });
   }
 

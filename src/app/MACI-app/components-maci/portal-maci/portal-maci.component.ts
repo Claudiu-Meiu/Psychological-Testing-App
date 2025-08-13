@@ -113,7 +113,9 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
 
   private _loadMaciClientsFromDb(): void {
     this._mongoDbMaciService.getClients().subscribe((clients: ClientMaci[]) => {
-      this.allMaciClients.data = clients;
+      this.allMaciClients.data = clients.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
     });
   }
 

@@ -2,7 +2,11 @@
 
 ## Development server
 
-Run ```ng serve``` for a dev server. Navigate to [http://localhost:4200/](http://localhost:4200/). The application will automatically reload if you change any of the source files.
+Run the command bellow for a dev server and navigate to [http://localhost:4200/](http://localhost:4200/). The application will automatically reload if you change any of the source files.
+
+```
+ng serve
+```
 
 ## Running the backend server after cloning
 

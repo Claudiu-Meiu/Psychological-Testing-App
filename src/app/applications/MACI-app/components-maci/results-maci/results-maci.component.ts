@@ -8,7 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../../models/app-routes.enum';
+import { AppRoutes } from '../../../../models/app-routes.enum';
 
 import { TestMaciService } from '../../services-maci/test-maci.service';
 import { ClientMaciService } from '../../services-maci/client-maci.service';

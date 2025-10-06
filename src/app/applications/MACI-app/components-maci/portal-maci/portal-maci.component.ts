@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../../models/app-routes.enum';
+import { AppRoutes } from '../../../../models/app-routes.enum';
 
 import { MongoDbMaciService } from '../../services-maci/mongodb-maci.service';
 import { AnswersMaciService } from '../../services-maci/answers-maci.service';
@@ -20,7 +20,7 @@ import { ClientMaciService } from '../../services-maci/client-maci.service';
 
 import { type ClientMaci } from '../../models-maci/client-maci.model';
 
-import { PaginatorIntlService } from '../../../services/overrides/paginatorIntl.service';
+import { PaginatorIntlService } from '../../../../services/overrides/paginatorIntl.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';

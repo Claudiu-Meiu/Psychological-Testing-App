@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../models/app-routes.enum';
+import { AppRoutes } from '../../../models/app-routes.enum';
 
 import { ClientMaciService } from './client-maci.service';
 import { CalculateMaciService } from './calculate-maci.service';

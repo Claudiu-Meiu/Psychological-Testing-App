@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../models/app-routes.enum';
+import { AppRoutes } from '../../../models/app-routes.enum';
 
 import { ClientMcmi3Service } from './client-mcmi-3.service';
 import { CalculateMcmi3Service } from './calculate-mcmi-3.service';

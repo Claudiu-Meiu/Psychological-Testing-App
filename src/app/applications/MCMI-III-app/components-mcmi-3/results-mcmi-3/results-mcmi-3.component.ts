@@ -8,7 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../../models/app-routes.enum';
+import { AppRoutes } from '../../../../models/app-routes.enum';
 
 import { TestMcmi3Service } from '../../services-mcmi-3/test-mcmi-3.service';
 import { ClientMcmi3Service } from '../../services-mcmi-3/client-mcmi-3.service';

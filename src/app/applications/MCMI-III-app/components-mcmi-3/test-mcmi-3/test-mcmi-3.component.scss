@@ -1,4 +1,4 @@
-@use "../../../../../node_modules/@angular/material/index" as mat;
+@use "../../../../../../node_modules/@angular/material/index" as mat;
 
 .mcmi3-test-mat-button-toggle {
   @include mat.button-toggle-overrides(

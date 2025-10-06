@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../../models/app-routes.enum';
+import { AppRoutes } from '../../../../models/app-routes.enum';
 
 import { AnswersMcmi3Service } from '../../services-mcmi-3/answers-mcmi-3.service';
 import { ClientMcmi3Service } from '../../services-mcmi-3/client-mcmi-3.service';

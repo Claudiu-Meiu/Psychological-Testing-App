@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '../../../models/app-routes.enum';
+import { AppRoutes } from '../../../../models/app-routes.enum';
 
 import { MongoDbMcmi3Service } from '../../services-mcmi-3/mongodb-mcmi-3.service';
 import { TestMcmi3Service } from '../../services-mcmi-3/test-mcmi-3.service';
@@ -20,7 +20,7 @@ import { ClientMcmi3Service } from '../../services-mcmi-3/client-mcmi-3.service'
 
 import { type ClientMcmi3 } from '../../models-mcmi-3/client-mcmi-3.model';
 
-import { PaginatorIntlService } from '../../../services/overrides/paginatorIntl.service';
+import { PaginatorIntlService } from '../../../../services/overrides/paginatorIntl.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';

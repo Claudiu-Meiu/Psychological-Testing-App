@@ -2,13 +2,13 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 
-import { PortalMaciComponent } from './MACI-app/components-maci/portal-maci/portal-maci.component';
-import { TestMaciComponent } from './MACI-app/components-maci/test-maci/test-maci.component';
-import { ResultsMaciComponent } from './MACI-app/components-maci/results-maci/results-maci.component';
+import { PortalMaciComponent } from './applications/MACI-app/components-maci/portal-maci/portal-maci.component';
+import { TestMaciComponent } from './applications/MACI-app/components-maci/test-maci/test-maci.component';
+import { ResultsMaciComponent } from './applications/MACI-app/components-maci/results-maci/results-maci.component';
 
-import { PortalMcmi3Component } from './MCMI-III-app/components-mcmi-3/portal-mcmi-3/portal-mcmi-3.component';
-import { TestMcmi3Component } from './MCMI-III-app/components-mcmi-3/test-mcmi-3/test-mcmi-3.component';
-import { ResultsMcmi3Component } from './MCMI-III-app/components-mcmi-3/results-mcmi-3/results-mcmi-3.component';
+import { PortalMcmi3Component } from './applications/MCMI-III-app/components-mcmi-3/portal-mcmi-3/portal-mcmi-3.component';
+import { TestMcmi3Component } from './applications/MCMI-III-app/components-mcmi-3/test-mcmi-3/test-mcmi-3.component';
+import { ResultsMcmi3Component } from './applications/MCMI-III-app/components-mcmi-3/results-mcmi-3/results-mcmi-3.component';
 
 export const routes: Routes = [
   {

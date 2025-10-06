@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { mcmi3Db } from "../config/mongodb.js";
+import { mcmi3Db } from "../config/mongoDb.js";
 
 const ScoreSchema = new Schema({
   scale: {

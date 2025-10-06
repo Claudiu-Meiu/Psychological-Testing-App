@@ -1,5 +1,5 @@
 import { Router } from "express";
-import MaciClient from "../models/MaciClient.js";
+import MaciClient from "../models/maciClient.js";
 
 const router = Router();
 

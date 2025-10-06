@@ -1,5 +1,5 @@
 import { Router } from "express";
-import Mcmi3Client from "../models/Mcmi3Client.js";
+import Mcmi3Client from "../models/mcmi3Client.js";
 
 const router = Router();
 

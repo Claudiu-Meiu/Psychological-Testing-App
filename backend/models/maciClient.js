@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { maciDb } from "../config/mongodb.js";
+import { maciDb } from "../config/mongoDb.js";
 
 const ScoreSchema = new Schema({
   scale: {

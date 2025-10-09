@@ -10,7 +10,7 @@
       <div class="flex items-center gap-2">
         <mat-icon class="example-tab-icon">assignment</mat-icon>
 
-        <header>MACI</header>
+        <header>P.A Schmieschek</header>
       </div>
     </ng-template>
 
@@ -19,55 +19,23 @@
     >
       <div class="flex flex-col items-center gap-15">
         <div class="flex flex-col items-center">
-          <header class="text-6xl">MACI</header>
+          <header class="text-6xl">P.A Schmieschek</header>
           <header class="text-2xl">Testare și Scorare</header>
         </div>
 
         <form
           class="flex flex-col items-center gap-5"
           (ngSubmit)="onSubmit()"
-          #maciPortalForm="ngForm"
+          #paschmieschekportalForm="ngForm"
         >
           <div class="flex max-md:flex-col items-center gap-4">
-            <mat-form-field appearance="outline">
-              <mat-label>Gen</mat-label>
-              <mat-select
-                [(ngModel)]="clientMaciService.genderValue"
-                name="gender"
-                (selectionChange)="clientMaciService.setGender($event.value)"
-                required
-              >
-                <mat-option [value]="'Masculin'">Masculin</mat-option>
-                <mat-option [value]="'Feminin'">Feminin</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Vârstă</mat-label>
-              <mat-select
-                [(ngModel)]="clientMaciService.ageValue"
-                name="age"
-                (selectionChange)="clientMaciService.setAge($event.value)"
-                required
-              >
-                <mat-option
-                  *ngFor="let age of [13, 14, 15, 16, 17, 18, 19]"
-                  [value]="age"
-                  >{{ age }}</mat-option
-                >
-              </mat-select>
-            </mat-form-field>
-
             <mat-form-field appearance="outline">
               <mat-label>Nume și Prenume</mat-label>
               <input
                 matInput
-                [(ngModel)]="clientMaciService.nameValue"
+                type="text"
+                [(ngModel)]="clientPaSchmieschekService.nameValue"
                 name="name"
-                [disabled]="
-                  !clientMaciService.genderValue || !clientMaciService.ageValue
-                "
-                required
               />
             </mat-form-field>
           </div>
@@ -77,9 +45,8 @@
               mat-flat-button
               type="submit"
               [disabled]="
-                !maciPortalForm.valid ||
-                !clientMaciService.genderValue ||
-                !clientMaciService.ageValue
+                !paschmieschekportalForm.valid ||
+                !clientPaSchmieschekService.nameValue
               "
             >
               Începe testul
@@ -106,7 +73,7 @@
 
           <input
             matInput
-            (keyup)="applyMaciTableFilter($event)"
+            (keyup)="applyPaSchmieschekFilter($event)"
             placeholder="Ex. 'nume'"
             #input
           />
@@ -118,7 +85,7 @@
 
         <table
           mat-table
-          [dataSource]="allMaciClients"
+          [dataSource]="allPaSchmieschekClients"
           matSort
           class="bg-zinc-50!"
         >
@@ -128,7 +95,9 @@
             <td mat-cell *matCellDef="let client">
               <button
                 mat-icon-button
-                (click)="openDeleteMaciClientDialog(client, '0ms', '0ms')"
+                (click)="
+                  openDeletePaSchmieschekClientDialog(client, '0ms', '0ms')
+                "
                 matTooltip="Șterge client"
               >
                 <mat-icon fontIcon="delete_forever"></mat-icon>
@@ -160,19 +129,6 @@
               Gen
             </th>
             <td mat-cell *matCellDef="let client">{{ client.gender }}</td>
-          </ng-container>
-
-          <!-- Age Column -->
-          <ng-container matColumnDef="age">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              matTooltip="Sortează după vârstă"
-            >
-              Vârstă
-            </th>
-            <td mat-cell *matCellDef="let client">{{ client.age }} ani</td>
           </ng-container>
 
           <!-- Date Column -->
@@ -213,15 +169,18 @@
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedMaciTableColumns"></tr>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedPaSchmieschekTableColumns"
+          ></tr>
           <tr
             mat-row
-            *matRowDef="let row; columns: displayedMaciTableColumns"
+            *matRowDef="let row; columns: displayedPaSchmieschekTableColumns"
             class="hover:bg-indigo-50!"
           ></tr>
         </table>
 
-        <p *ngIf="allMaciClients.data.length === 0">
+        <p *ngIf="allPaSchmieschekClients.data.length === 0">
           Lista de clienți este goală.
         </p>
 

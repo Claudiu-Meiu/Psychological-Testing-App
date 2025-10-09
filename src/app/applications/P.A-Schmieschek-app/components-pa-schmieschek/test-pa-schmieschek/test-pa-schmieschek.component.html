@@ -1,0 +1,132 @@
+<div *ngIf="selectedClient">
+  <div class="flex items-center justify-center gap-4 flex-wrap">
+    <button mat-button (click)="exitTest()">
+      <mat-icon>close</mat-icon>Închide
+    </button>
+    <div>
+      P.A Schmieschek / Testare / {{ selectedClient.name }} -
+      {{ selectedClient.date | date : "dd.MM.yyyy" }}
+    </div>
+  </div>
+
+  <mat-stepper class="bg-zinc-50! mt-10">
+    <mat-step label="1-70">
+      <div
+        class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-y-30 gap-x-10 mt-10 mb-10"
+      >
+        <div
+          *ngFor="
+            let key of answersPaSchmieschekService.answersKeys | slice : 0 : 44;
+            let i = index
+          "
+          class="flex flex-col items-center"
+        >
+          <p class="text-2xl">{{ i + 1 }}</p>
+
+          <mat-button-toggle-group
+            class="paschmieschek-test-mat-button-toggle"
+            [hideSingleSelectionIndicator]="true"
+          >
+            <mat-button-toggle
+              [checked]="answersPaSchmieschekService.savedAnswers[key] === 'DA'"
+              (click)="
+                answersPaSchmieschekService.updateClientAnswerByKey(
+                  key,
+                  'DA',
+                  selectedClient._id
+                )
+              "
+              >DA</mat-button-toggle
+            >
+            <mat-button-toggle
+              [checked]="answersPaSchmieschekService.savedAnswers[key] === 'NU'"
+              (click)="
+                answersPaSchmieschekService.updateClientAnswerByKey(
+                  key,
+                  'NU',
+                  selectedClient._id
+                )
+              "
+              >NU</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="flex justify-center mt-10">
+        <button mat-button matStepperNext>Continuă</button>
+      </div>
+    </mat-step>
+
+    <mat-step label="71-140">
+      <div
+        class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-y-30 gap-x-10 mt-10 mb-10"
+      >
+        <div
+          *ngFor="
+            let key of answersPaSchmieschekService.answersKeys
+              | slice : 44 : 88;
+            let i = index
+          "
+          class="flex flex-col items-center"
+        >
+          <p class="text-2xl">{{ i + 45 }}</p>
+
+          <mat-button-toggle-group
+            class="paschmieschek-test-mat-button-toggle"
+            [hideSingleSelectionIndicator]="true"
+          >
+            <mat-button-toggle
+              [checked]="answersPaSchmieschekService.savedAnswers[key] === 'DA'"
+              (click)="
+                answersPaSchmieschekService.updateClientAnswerByKey(
+                  key,
+                  'DA',
+                  selectedClient._id
+                )
+              "
+              >DA</mat-button-toggle
+            >
+            <mat-button-toggle
+              [checked]="answersPaSchmieschekService.savedAnswers[key] === 'NU'"
+              (click)="
+                answersPaSchmieschekService.updateClientAnswerByKey(
+                  key,
+                  'NU',
+                  selectedClient._id
+                )
+              "
+              >NU</mat-button-toggle
+            >
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="flex items-center justify-center gap-4 mt-10">
+        <button mat-button matStepperPrevious>Înapoi</button>
+        <button mat-button matStepperNext>Continuă</button>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>
+        <mat-icon fontIcon="done_all"></mat-icon>
+      </ng-template>
+
+      <div class="flex flex-col items-center gap-10 mt-30">
+        <header class="text-4xl">Calculează Scorurile</header>
+
+        <div class="flex items-center gap-4">
+          <button mat-button matStepperPrevious>Înapoi</button>
+          <button mat-flat-button (click)="calculatePaSchmieschekScoresBtn()">
+            Calculează
+          </button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

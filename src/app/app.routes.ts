@@ -10,6 +10,10 @@ import { PortalMcmi3Component } from './applications/MCMI-III-app/components-mcm
 import { TestMcmi3Component } from './applications/MCMI-III-app/components-mcmi-3/test-mcmi-3/test-mcmi-3.component';
 import { ResultsMcmi3Component } from './applications/MCMI-III-app/components-mcmi-3/results-mcmi-3/results-mcmi-3.component';
 
+import { PortalPaSchmieschekComponent } from './applications/P.A-Schmieschek-app/components-pa-schmieschek/portal-pa-schmieschek/portal-pa-schmieschek.component';
+import { TestPaSchmieschekComponent } from './applications/P.A-Schmieschek-app/components-pa-schmieschek/test-pa-schmieschek/test-pa-schmieschek.component';
+import { ResultsPaSchmieschekComponent } from './applications/P.A-Schmieschek-app/components-pa-schmieschek/results-pa-schmieschek/results-pa-schmieschek.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -40,5 +44,18 @@ export const routes: Routes = [
   {
     path: 'mcmi3/scoruri',
     component: ResultsMcmi3Component,
+  },
+
+  {
+    path: 'paschmieschek',
+    component: PortalPaSchmieschekComponent,
+  },
+  {
+    path: 'paschmieschek/testare',
+    component: TestPaSchmieschekComponent,
+  },
+  {
+    path: 'paschmieschek/scoruri',
+    component: ResultsPaSchmieschekComponent,
   },
 ];

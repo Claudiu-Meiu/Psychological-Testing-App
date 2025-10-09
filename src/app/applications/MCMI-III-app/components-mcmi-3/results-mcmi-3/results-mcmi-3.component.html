@@ -1,49 +1,90 @@
 <div *ngIf="selectedClient && selectedClient.scores">
-    <div class="flex items-center justify-center gap-4 flex-wrap">
-        <button mat-button (click)="exitResults()"><mat-icon>close</mat-icon>
-            Închide</button>
+  <div class="flex items-center justify-center gap-4 flex-wrap">
+    <button mat-button (click)="exitResults()">
+      <mat-icon>close</mat-icon> Închide
+    </button>
 
-        <button mat-button (click)="goBackToAnswers()">
-            Înapoi la răspunsuri</button>
+    <button mat-button (click)="goBackToAnswers()">Înapoi la răspunsuri</button>
 
-        <div>MCMI-III / Scoruri / {{ selectedClient.name }} - {{ selectedClient.date | date: 'dd.MM.yyyy' }}</div>
+    <div>
+      MCMI-III / Scoruri / {{ selectedClient.name }} -
+      {{ selectedClient.date | date : "dd.MM.yyyy" }}
     </div>
+  </div>
 
-    <div class="mt-20 mb-20 w-3/5 max-md:w-full m-auto">
-        <div class="flex flex-col gap-4 items-start w-full">
-            <mat-form-field appearance="outline">
-                <mat-label>Filtrează</mat-label>
+  <div class="mt-20 mb-20 w-3/5 max-md:w-full m-auto">
+    <div class="flex flex-col gap-4 items-start w-full">
+      <mat-form-field appearance="outline">
+        <mat-label>Filtrează</mat-label>
 
-                <input matInput (keyup)="applyMcmi3ResultsTableFilter($event)" placeholder="Ex. 'scala x'" #input>
+        <input
+          matInput
+          (keyup)="applyMcmi3ResultsTableFilter($event)"
+          placeholder="Ex. 'scala x'"
+          #input
+        />
 
-                <mat-icon matIconSuffix matTooltip="Filtreză scorurile">search</mat-icon>
-            </mat-form-field>
+        <mat-icon matIconSuffix matTooltip="Filtreză scorurile"
+          >search</mat-icon
+        >
+      </mat-form-field>
 
-            <table mat-table [dataSource]="mcmi3Results" matSort>
-                <!-- Scale Column -->
-                <ng-container matColumnDef="scale">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după scală">Scala</th>
-                    <td mat-cell *matCellDef="let element">{{element.scale}}</td>
-                </ng-container>
+      <table mat-table [dataSource]="mcmi3Results" matSort class="bg-zinc-50!">
+        <!-- Scale Column -->
+        <ng-container matColumnDef="scale">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            matTooltip="Sortează după scală"
+          >
+            Scala
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.scale }}</td>
+        </ng-container>
 
-                <!-- Gross Column -->
-                <ng-container matColumnDef="gross">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după scor brut">Scor brut
-                    </th>
-                    <td mat-cell *matCellDef="let element">{{element.gross}}</td>
-                </ng-container>
+        <!-- Gross Column -->
+        <ng-container matColumnDef="gross">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            matTooltip="Sortează după scor brut"
+          >
+            Scor brut
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.gross }}</td>
+        </ng-container>
 
-                <!-- BR Column -->
-                <ng-container matColumnDef="br">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Sortează după scor BR">Scor BR
-                    </th>
-                    <td mat-cell *matCellDef="let element" class="text-material-blue font-bold">{{element.br}}</td>
-                </ng-container>
+        <!-- BR Column -->
+        <ng-container matColumnDef="br">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            matTooltip="Sortează după scor BR"
+          >
+            Scor BR
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="text-material-blue font-bold"
+          >
+            {{ element.br }}
+          </td>
+        </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedMcmi3ResultsTableColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedMcmi3ResultsTableColumns;"
-                    class="hover:bg-indigo-50!">
-                </tr>
-            </table>
-        </div>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedMcmi3ResultsTableColumns"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedMcmi3ResultsTableColumns"
+          class="hover:bg-indigo-50!"
+        ></tr>
+      </table>
     </div>
+  </div>
+</div>

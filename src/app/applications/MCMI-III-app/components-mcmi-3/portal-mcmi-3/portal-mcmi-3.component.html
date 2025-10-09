@@ -97,110 +97,109 @@
           >
         </mat-form-field>
 
-        <ng-container
-          *ngIf="allMcmi3Clients.data.length === 0; else clientsTable"
+        <table
+          mat-table
+          [dataSource]="allMcmi3Clients"
+          matSort
+          class="bg-zinc-50!"
         >
-          <p>Lista de clienți este goală.</p>
-        </ng-container>
+          <!-- Delete client Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let client">
+              <button
+                mat-icon-button
+                (click)="openDeleteMcmi3ClientDialog(client, '0ms', '0ms')"
+                matTooltip="Șterge client"
+              >
+                <mat-icon fontIcon="delete_forever"></mat-icon>
+              </button>
 
-        <ng-template #clientsTable>
-          <table mat-table [dataSource]="allMcmi3Clients" matSort>
-            <!-- Delete client Column -->
-            <ng-container matColumnDef="delete">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let client">
+              <p *ngIf="allMcmi3Clients.data.length === 0">0 clienți</p>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              matTooltip="Sortează după nume"
+            >
+              Nume
+            </th>
+            <td mat-cell *matCellDef="let client">{{ client.name }}</td>
+          </ng-container>
+
+          <!-- Gender Column -->
+          <ng-container matColumnDef="gender">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              matTooltip="Sortează după gen"
+            >
+              Gen
+            </th>
+            <td mat-cell *matCellDef="let client">{{ client.gender }}</td>
+          </ng-container>
+
+          <!-- Date Column -->
+          <ng-container matColumnDef="date">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              matTooltip="Sortează după dată"
+            >
+              Dată
+            </th>
+            <td mat-cell *matCellDef="let client">
+              {{ client.date | date : "dd.MM.yyyy" }}
+            </td>
+          </ng-container>
+
+          <!-- Answers / Scores Column -->
+          <ng-container matColumnDef="answers-scores">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let client">
+              <div class="flex items-center gap-2 justify-end">
                 <button
-                  mat-icon-button
-                  (click)="openDeleteMcmi3ClientDialog(client, '0ms', '0ms')"
-                  matTooltip="Șterge client"
+                  mat-button
+                  (click)="selectClient(client); viewAnswers()"
                 >
-                  <mat-icon fontIcon="delete_forever"></mat-icon>
+                  <mat-icon>assignment</mat-icon>Răspunsuri
                 </button>
 
-                <p *ngIf="allMcmi3Clients.data.length === 0">0 clienți</p>
-              </td>
-            </ng-container>
+                <button
+                  mat-button
+                  *ngIf="client.scores.length !== 0"
+                  (click)="selectClient(client); viewResults()"
+                >
+                  <mat-icon>assignment_turned_in</mat-icon>Scoruri
+                </button>
+              </div>
+            </td>
+          </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header
-                matTooltip="Sortează după nume"
-              >
-                Nume
-              </th>
-              <td mat-cell *matCellDef="let client">{{ client.name }}</td>
-            </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedMcmi3TableColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedMcmi3TableColumns"
+            class="hover:bg-indigo-50!"
+          ></tr>
+        </table>
 
-            <!-- Gender Column -->
-            <ng-container matColumnDef="gender">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header
-                matTooltip="Sortează după gen"
-              >
-                Gen
-              </th>
-              <td mat-cell *matCellDef="let client">{{ client.gender }}</td>
-            </ng-container>
-
-            <!-- Date Column -->
-            <ng-container matColumnDef="date">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header
-                matTooltip="Sortează după dată"
-              >
-                Dată
-              </th>
-              <td mat-cell *matCellDef="let client">
-                {{ client.date | date : "dd.MM.yyyy" }}
-              </td>
-            </ng-container>
-
-            <!-- Answers / Scores Column -->
-            <ng-container matColumnDef="answers-scores">
-              <th mat-header-cell *matHeaderCellDef></th>
-              <td mat-cell *matCellDef="let client">
-                <div class="flex items-center gap-2 justify-end">
-                  <button
-                    mat-button
-                    (click)="selectClient(client); viewAnswers()"
-                  >
-                    <mat-icon>assignment</mat-icon>Răspunsuri
-                  </button>
-
-                  <button
-                    mat-button
-                    *ngIf="client.scores.length !== 0"
-                    (click)="selectClient(client); viewResults()"
-                  >
-                    <mat-icon>assignment_turned_in</mat-icon>Scoruri
-                  </button>
-                </div>
-              </td>
-            </ng-container>
-
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedMcmi3TableColumns"
-            ></tr>
-            <tr
-              mat-row
-              *matRowDef="let row; columns: displayedMcmi3TableColumns"
-              class="hover:bg-indigo-50!"
-            ></tr>
-          </table>
-        </ng-template>
+        <p *ngIf="allMcmi3Clients.data.length === 0">
+          Lista de clienți este goală.
+        </p>
 
         <mat-paginator
           [pageSizeOptions]="[5, 10, 20]"
           [showFirstLastButtons]="true"
           aria-label="Select page"
+          class="bg-zinc-50!"
         >
         </mat-paginator>
       </div>

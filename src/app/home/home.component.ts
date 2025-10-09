@@ -31,4 +31,8 @@ export class HomeComponent {
   public mcmi3Btn(): Promise<boolean> {
     return this._router.navigate([AppRoutes.Mcmi3]);
   }
+
+  public paSchmieschekBtn(): Promise<boolean> {
+    return this._router.navigate([AppRoutes.PaSchmieschek]);
+  }
 }

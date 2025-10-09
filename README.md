@@ -10,7 +10,7 @@ ng serve
 
 ## Running the backend server after cloning
 
-If you clone the project instead of using the installer, you will need to manually install MongoDB on your system. After installing MongoDB, you can start the server by running the following command in the console:
+After cloning the project, you will need to manually install MongoDB on your system. After installing MongoDB, you can start the server by running the following command in the console:
 
 ```
 npm run server
@@ -43,7 +43,3 @@ npm run package:all
 ```
 
 Once the packaging process is complete, you can find the executable files in the `release-builds` directory. This directory contains the packaged applications that you can distribute and run on your systems.
-
-## Windows Installer
-
-For Windows users, there is an installer available that simplifies the setup process. The installer includes the option to install MongoDB.

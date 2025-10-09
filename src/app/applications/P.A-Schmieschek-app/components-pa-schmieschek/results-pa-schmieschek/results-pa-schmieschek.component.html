@@ -7,7 +7,7 @@
     <button mat-button (click)="goBackToAnswers()">Înapoi la răspunsuri</button>
 
     <div>
-      MACI / Scoruri / {{ selectedClient.name }} -
+      P.A Schmieschek / Scoruri / {{ selectedClient.name }} -
       {{ selectedClient.date | date : "dd.MM.yyyy" }}
     </div>
   </div>
@@ -19,8 +19,8 @@
 
         <input
           matInput
-          (keyup)="applyMaciResultsTableFilter($event)"
-          placeholder="Ex. 'scala x'"
+          (keyup)="applyPaSchmieschekResultsTableFilter($event)"
+          placeholder="Ex. 'Grupa I'"
           #input
         />
 
@@ -29,59 +29,77 @@
         >
       </mat-form-field>
 
-      <table mat-table [dataSource]="maciResults" matSort class="bg-zinc-50!">
-        <!-- Scale Column -->
-        <ng-container matColumnDef="scale">
+      <table
+        mat-table
+        [dataSource]="paSchmieschekResults"
+        matSort
+        class="bg-zinc-50!"
+      >
+        <!-- Group Name Column -->
+        <ng-container matColumnDef="groupName">
           <th
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            matTooltip="Sortează după scală"
+            matTooltip="Sortează după grupă"
           >
-            Scala
+            Grupa
           </th>
-          <td mat-cell *matCellDef="let element">{{ element.scale }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.groupName }}</td>
         </ng-container>
 
-        <!-- Gross Column -->
-        <ng-container matColumnDef="gross">
-          <th
-            mat-header-cell
-            *matHeaderCellDef
-            mat-sort-header
-            matTooltip="Sortează după scor brut"
-          >
-            Scor brut
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.gross }}</td>
+        <!-- Symptomatic Answers -->
+        <ng-container matColumnDef="symptomaticAnswers">
+          <th mat-header-cell *matHeaderCellDef>Răspunsuri simptomatice</th>
+          <td mat-cell *matCellDef="let element">
+            {{ "(" + element.symptomaticAnswers.join(", ") + ")" }}
+          </td>
         </ng-container>
 
-        <!-- BR Column -->
-        <ng-container matColumnDef="br">
+        <!-- Total Number of Symptomatic Answers -->
+        <ng-container matColumnDef="total">
           <th
             mat-header-cell
             *matHeaderCellDef
             mat-sort-header
-            matTooltip="Sortează după scor BR"
+            matTooltip="Sortează după numărul total de răspunsuri simptomatice"
           >
-            Scor BR
+            Total răspunsuri
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.total }}
+          </td>
+        </ng-container>
+
+        <!-- Percentage -->
+        <ng-container matColumnDef="percentage">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            matTooltip="Sortează după procentaj"
+          >
+            Procentaj
           </th>
           <td
             mat-cell
             *matCellDef="let element"
             class="text-material-blue font-bold"
           >
-            {{ element.br }}
+            {{ element.percentage }} %
           </td>
         </ng-container>
 
         <tr
           mat-header-row
-          *matHeaderRowDef="displayedMaciResultsTableColumns"
+          *matHeaderRowDef="displayedPaSchmieschekResultsTableColumns"
         ></tr>
         <tr
           mat-row
-          *matRowDef="let row; columns: displayedMaciResultsTableColumns"
+          *matRowDef="
+            let row;
+            columns: displayedPaSchmieschekResultsTableColumns
+          "
           class="hover:bg-indigo-50!"
         ></tr>
       </table>

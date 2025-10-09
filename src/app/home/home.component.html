@@ -1,14 +1,31 @@
 <div class="flex flex-col items-center justify-center h-screen">
-    <div class="flex max-md:flex-col items-center gap-30">
-        <div class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue" (click)="maciBtn()"
-            matTooltip="Deschide portalul MACI" matTooltipPosition="above">
-            <div class="text-6xl">MACI</div>
-            <mat-icon fontIcon="launch"></mat-icon>
-        </div>
-        <div class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue" (click)="mcmi3Btn()"
-            matTooltip="Deschide portalul MCMI-III" matTooltipPosition="above">
-            <div class="text-6xl">MCMI-III</div>
-            <mat-icon fontIcon="launch"></mat-icon>
-        </div>
+  <div class="flex flex-col gap-10">
+    <div
+      class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue"
+      (click)="maciBtn()"
+      matTooltip="Deschide MACI"
+      matTooltipPosition="above"
+    >
+      <div class="text-6xl">MACI</div>
+      <mat-icon fontIcon="launch"></mat-icon>
     </div>
+    <div
+      class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue"
+      (click)="mcmi3Btn()"
+      matTooltip="Deschide MCMI-III"
+      matTooltipPosition="above"
+    >
+      <div class="text-6xl">MCMI-III</div>
+      <mat-icon fontIcon="launch"></mat-icon>
+    </div>
+    <div
+      class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue"
+      (click)="paSchmieschekBtn()"
+      matTooltip="Deschide P.A Schmieschek"
+      matTooltipPosition="above"
+    >
+      <div class="text-6xl">P.A Schmieschek</div>
+      <mat-icon fontIcon="launch"></mat-icon>
+    </div>
+  </div>
 </div>

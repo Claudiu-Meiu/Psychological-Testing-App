@@ -36,6 +36,7 @@
                 type="text"
                 [(ngModel)]="clientPaSchmieschekService.nameValue"
                 name="name"
+                required
               />
             </mat-form-field>
           </div>
@@ -116,19 +117,6 @@
               Nume
             </th>
             <td mat-cell *matCellDef="let client">{{ client.name }}</td>
-          </ng-container>
-
-          <!-- Gender Column -->
-          <ng-container matColumnDef="gender">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              matTooltip="Sortează după gen"
-            >
-              Gen
-            </th>
-            <td mat-cell *matCellDef="let client">{{ client.gender }}</td>
           </ng-container>
 
           <!-- Date Column -->

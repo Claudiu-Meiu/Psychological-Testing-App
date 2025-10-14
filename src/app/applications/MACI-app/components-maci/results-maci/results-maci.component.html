@@ -29,7 +29,12 @@
         >
       </mat-form-field>
 
-      <table mat-table [dataSource]="maciResults" matSort class="bg-zinc-50!">
+      <table
+        mat-table
+        [dataSource]="maciResults"
+        matSort
+        class="bg-zinc-50! dark:bg-zinc-900!"
+      >
         <!-- Scale Column -->
         <ng-container matColumnDef="scale">
           <th
@@ -69,7 +74,7 @@
           <td
             mat-cell
             *matCellDef="let element"
-            class="text-material-blue font-bold"
+            class="text-material-blue dark:text-material-cyan font-bold"
           >
             {{ element.br }}
           </td>
@@ -82,7 +87,7 @@
         <tr
           mat-row
           *matRowDef="let row; columns: displayedMaciResultsTableColumns"
-          class="hover:bg-indigo-50!"
+          class="hover:bg-indigo-50! dark:hover:bg-zinc-800!"
         ></tr>
       </table>
     </div>

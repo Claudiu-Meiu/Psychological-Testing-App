@@ -6,7 +6,18 @@
       shape: 5px,
       label-text-size: 30px,
       selected-state-text-color: #1976d2,
-      selected-state-background-color: #1976d224,
+      selected-state-background-color: #1976d24b,
+    )
+  );
+}
+
+::ng-deep html.dark .mcmi3-test-mat-button-toggle {
+  @include mat.button-toggle-overrides(
+    (
+      shape: 5px,
+      label-text-size: 30px,
+      selected-state-text-color: #00dddd,
+      selected-state-background-color: #00dddd4b,
     )
   );
 }

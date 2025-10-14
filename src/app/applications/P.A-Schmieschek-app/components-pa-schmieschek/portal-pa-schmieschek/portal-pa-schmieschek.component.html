@@ -88,7 +88,7 @@
           mat-table
           [dataSource]="allPaSchmieschekClients"
           matSort
-          class="bg-zinc-50!"
+          class="bg-zinc-50! dark:bg-zinc-900!"
         >
           <!-- Delete client Column -->
           <ng-container matColumnDef="delete">
@@ -164,7 +164,7 @@
           <tr
             mat-row
             *matRowDef="let row; columns: displayedPaSchmieschekTableColumns"
-            class="hover:bg-indigo-50!"
+            class="hover:bg-indigo-50! dark:hover:bg-zinc-800!"
           ></tr>
         </table>
 
@@ -176,7 +176,7 @@
           [pageSizeOptions]="[5, 10, 20]"
           [showFirstLastButtons]="true"
           aria-label="Select page"
-          class="bg-zinc-50!"
+          class="bg-zinc-50! dark:bg-zinc-900!"
         >
         </mat-paginator>
       </div>

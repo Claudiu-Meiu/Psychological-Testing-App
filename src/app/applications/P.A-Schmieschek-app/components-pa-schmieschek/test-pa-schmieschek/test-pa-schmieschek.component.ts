@@ -29,7 +29,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
   ],
   templateUrl: './test-pa-schmieschek.component.html',
-  styleUrl: './test-pa-schmieschek.component.scss',
 })
 export class TestPaSchmieschekComponent implements OnInit {
   private _router = inject(Router);

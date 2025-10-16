@@ -84,12 +84,7 @@
           >
         </mat-form-field>
 
-        <table
-          mat-table
-          [dataSource]="allPaSchmieschekClients"
-          matSort
-          class="bg-zinc-50! dark:bg-zinc-900!"
-        >
+        <table mat-table [dataSource]="allPaSchmieschekClients" matSort>
           <!-- Delete client Column -->
           <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef></th>
@@ -164,7 +159,6 @@
           <tr
             mat-row
             *matRowDef="let row; columns: displayedPaSchmieschekTableColumns"
-            class="hover:bg-indigo-50! dark:hover:bg-zinc-800!"
           ></tr>
         </table>
 
@@ -176,7 +170,6 @@
           [pageSizeOptions]="[5, 10, 20]"
           [showFirstLastButtons]="true"
           aria-label="Select page"
-          class="bg-zinc-50! dark:bg-zinc-900!"
         >
         </mat-paginator>
       </div>

@@ -29,12 +29,7 @@
         >
       </mat-form-field>
 
-      <table
-        mat-table
-        [dataSource]="paSchmieschekResults"
-        matSort
-        class="bg-zinc-50! dark:bg-zinc-900!"
-      >
+      <table mat-table [dataSource]="paSchmieschekResults" matSort>
         <!-- Group Name Column -->
         <ng-container matColumnDef="groupName">
           <th
@@ -84,7 +79,7 @@
           <td
             mat-cell
             *matCellDef="let element"
-            class="text-material-blue dark:text-material-cyan font-bold"
+            class="text-material-blue dark:text-material-light-blue font-bold"
           >
             {{ element.percentage }} %
           </td>
@@ -100,7 +95,6 @@
             let row;
             columns: displayedPaSchmieschekResultsTableColumns
           "
-          class="hover:bg-indigo-50! dark:hover:bg-zinc-800!"
         ></tr>
       </table>
     </div>

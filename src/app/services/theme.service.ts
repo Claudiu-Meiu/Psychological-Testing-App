@@ -5,8 +5,8 @@ import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 })
 export class ThemeService {
   private renderer: Renderer2;
-  private readonly _lightTheme = 'assets/themes/azure-blue.css';
-  private readonly _darkTheme = 'assets/themes/cyan-orange.css';
+  private readonly _lightTheme = 'assets/themes/light-theme.css';
+  private readonly _darkTheme = 'assets/themes/dark-theme.css';
 
   private readonly _themeLinkId = 'app-theme';
   private readonly _storageKey = 'app-theme-mode';

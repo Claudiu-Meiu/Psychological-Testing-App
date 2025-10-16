@@ -29,7 +29,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
   ],
   templateUrl: './test-maci.component.html',
-  styleUrl: './test-maci.component.scss',
 })
 export class TestMaciComponent implements OnInit {
   private _router = inject(Router);

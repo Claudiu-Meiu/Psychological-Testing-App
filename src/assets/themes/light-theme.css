@@ -1272,7 +1272,7 @@ html {
   --mat-stepper-header-selected-state-icon-foreground-color: #ffffff;
   --mat-stepper-header-edit-state-icon-background-color: #005cbb;
   --mat-stepper-header-edit-state-icon-foreground-color: #ffffff;
-  --mat-stepper-container-color: #faf9fd;
+  --mat-stepper-container-color: none;
   --mat-stepper-line-color: #74777f;
   --mat-stepper-header-hover-state-layer-color: rgba(47, 48, 51, 0.08);
   --mat-stepper-header-focus-state-layer-color: rgba(47, 48, 51, 0.12);

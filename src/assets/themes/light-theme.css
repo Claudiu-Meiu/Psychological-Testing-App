@@ -1213,8 +1213,8 @@ html {
   --mat-datepicker-calendar-period-button-text-weight: 500;
   --mat-datepicker-calendar-header-text-size: 0.875rem;
   --mat-datepicker-calendar-header-text-weight: 500;
-  --mat-datepicker-calendar-container-shape: 16px;
-  --mat-datepicker-calendar-container-touch-shape: 28px;
+  --mat-datepicker-calendar-container-shape: 10px;
+  --mat-datepicker-calendar-container-touch-shape: 10px;
   --mat-datepicker-calendar-container-elevation-shadow: 0px 0px 0px 0px
       rgba(0, 0, 0, 0.2),
     0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);

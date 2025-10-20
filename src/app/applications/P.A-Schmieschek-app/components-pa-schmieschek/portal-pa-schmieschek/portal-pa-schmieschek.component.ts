@@ -20,8 +20,6 @@ import { ClientPaSchmieschekService } from '../../services-pa-schmieschek/client
 
 import { type ClientPaSchmieschek } from '../../models-pa-schmieschek/client-pa-schmieschek.model';
 
-import { PaginatorIntlService } from '../../../../services/overrides/paginatorIntl.service';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -29,11 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import {
-  MatPaginatorModule,
-  MatPaginator,
-  MatPaginatorIntl,
-} from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import {
   MAT_DIALOG_DATA,
@@ -45,6 +39,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-portal-pa-schmieschek',
@@ -62,8 +57,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
+    MatDatepickerModule,
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
   templateUrl: './portal-pa-schmieschek.component.html',
 })
 export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
@@ -88,6 +83,8 @@ export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
   public displayedPaSchmieschekTableColumns: string[] = [
     'delete',
     'name',
+    'age',
+    'gender',
     'date',
     'answers-scores',
   ];
@@ -124,7 +121,10 @@ export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
   private _addPaSchmieschekClient(): void {
     const newClient: ClientPaSchmieschek = {
       date: new Date(),
-      name: this.clientPaSchmieschekService.nameValue,
+      name: this.clientPaSchmieschekService.name,
+      dateOfBirth: this.clientPaSchmieschekService.dateOfBirth,
+      age: this.clientPaSchmieschekService.age,
+      gender: this.clientPaSchmieschekService.gender,
       answers:
         this._answersPaSchmieschekService.generateEmptyAnswersObjectPaSchmieschek(),
     };

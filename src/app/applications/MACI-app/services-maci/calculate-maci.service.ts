@@ -469,8 +469,8 @@ export class CalculateMaciService {
 
     if (
       this._selectedClient!.gender === 'Masculin' &&
-      this._selectedClient!.age >= 13 &&
-      this._selectedClient!.age <= 15
+      this._selectedClient!.age! >= 13 &&
+      this._selectedClient!.age! <= 15
     ) {
       resultScaleBR =
         this._tableReferenceMaciService.Male['age13to15'][scale][
@@ -479,8 +479,8 @@ export class CalculateMaciService {
     }
     if (
       this._selectedClient!.gender === 'Masculin' &&
-      this._selectedClient!.age >= 16 &&
-      this._selectedClient!.age <= 19
+      this._selectedClient!.age! >= 16 &&
+      this._selectedClient!.age! <= 19
     ) {
       resultScaleBR =
         this._tableReferenceMaciService.Male['age16to19'][scale][
@@ -489,8 +489,8 @@ export class CalculateMaciService {
     }
     if (
       this._selectedClient!.gender === 'Feminin' &&
-      this._selectedClient!.age >= 13 &&
-      this._selectedClient!.age <= 15
+      this._selectedClient!.age! >= 13 &&
+      this._selectedClient!.age! <= 15
     ) {
       resultScaleBR =
         this._tableReferenceMaciService.Female['age13to15'][scale][
@@ -499,8 +499,8 @@ export class CalculateMaciService {
     }
     if (
       this._selectedClient!.gender === 'Feminin' &&
-      this._selectedClient!.age >= 16 &&
-      this._selectedClient!.age <= 19
+      this._selectedClient!.age! >= 16 &&
+      this._selectedClient!.age! <= 19
     ) {
       resultScaleBR =
         this._tableReferenceMaciService.Female['age16to19'][scale][

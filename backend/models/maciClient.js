@@ -21,15 +21,19 @@ const MaciClientSchema = new Schema({
     type: Date,
     required: true,
   },
-  gender: {
+  name: {
     type: String,
+    required: true,
+  },
+  dateOfBirth: {
+    type: Date,
     required: true,
   },
   age: {
     type: Number,
     required: true,
   },
-  name: {
+  gender: {
     type: String,
     required: true,
   },

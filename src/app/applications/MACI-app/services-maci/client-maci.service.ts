@@ -7,19 +7,15 @@ import { type ClientMaci } from '../models-maci/client-maci.model';
   providedIn: 'root',
 })
 export class ClientMaciService {
-  public nameValue: string = '';
-  public genderValue: string = '';
-  public ageValue: number = 0;
+  public name: string = '';
+  public dateOfBirth: Date | null = null;
+  public gender: string = '';
 
   public selectedClientSubject: BehaviorSubject<ClientMaci | null> =
     new BehaviorSubject<ClientMaci | null>(null);
 
   public setGender(value: string): void {
-    this.genderValue = value;
-  }
-
-  public setAge(value: number): void {
-    this.ageValue = value;
+    this.gender = value;
   }
 
   public setSelectedClient(client: ClientMaci | null): void {
@@ -27,9 +23,27 @@ export class ClientMaciService {
   }
 
   public resetClient(): void {
-    this.nameValue = '';
-    this.genderValue = '';
-    this.ageValue = 0;
+    this.name = '';
+    this.dateOfBirth = null;
+    this.gender = '';
     this.setSelectedClient(null);
+  }
+
+  public get age(): number | null {
+    if (!this.dateOfBirth) return null;
+
+    const dob = new Date(this.dateOfBirth);
+
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+
+    const monthDiff = today.getMonth() - dob.getMonth();
+    const dayDiff = today.getDate() - dob.getDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+
+    return age;
   }
 }

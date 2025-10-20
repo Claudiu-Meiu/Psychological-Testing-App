@@ -9,12 +9,13 @@
     </button>
 
     <div>
-      P.A Schmieschek / Scoruri / {{ selectedClient.name }} -
-      {{ selectedClient.date | date : "dd.MM.yyyy" }}
+      P.A Schmieschek / Scoruri -
+      {{ selectedClient.date | date : "dd.MM.yyyy" }} /
+      {{ selectedClient.name }}
     </div>
   </div>
 
-  <div class="mt-20 mb-20 w-3/5 max-md:w-full m-auto">
+  <div class="mt-20 mb-20 w-4/5 max-md:w-full m-auto">
     <div class="flex flex-col gap-4 items-start w-full">
       <mat-form-field appearance="outline">
         <mat-label>Filtrează</mat-label>

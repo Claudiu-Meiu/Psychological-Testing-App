@@ -45,6 +45,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-portal-mcmi-3',
@@ -62,6 +63,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
+    MatDatepickerModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
   templateUrl: './portal-mcmi-3.component.html',
@@ -86,6 +88,7 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
   public displayedMcmi3TableColumns: string[] = [
     'delete',
     'name',
+    'age',
     'gender',
     'date',
     'answers-scores',
@@ -123,8 +126,10 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
   private _addMcmi3Client(): void {
     const newClient: ClientMcmi3 = {
       date: new Date(),
-      gender: this.clientMcmi3Service.genderValue,
-      name: this.clientMcmi3Service.nameValue,
+      name: this.clientMcmi3Service.name,
+      dateOfBirth: this.clientMcmi3Service.dateOfBirth,
+      age: this.clientMcmi3Service.age,
+      gender: this.clientMcmi3Service.gender,
       answers: this._answersMcmi3Service.generateEmptyAnswersObjectMcmi3(),
     };
 

@@ -37,13 +37,13 @@ export class TestPaSchmieschekComponent implements OnInit {
   private _calculatePaSchmieschekService = inject(
     CalculatePaSchmieschekService
   );
-  private _clientPaSchmieschekService = inject(ClientPaSchmieschekService);
+  public clientPaSchmieschekService = inject(ClientPaSchmieschekService);
   public answersPaSchmieschekService = inject(AnswersPaSchmieschekService);
 
   public selectedClient: ClientPaSchmieschek | null = null;
 
   ngOnInit(): void {
-    this._clientPaSchmieschekService.selectedClientSubject.subscribe({
+    this.clientPaSchmieschekService.selectedClientSubject.subscribe({
       next: (client) => {
         this.selectedClient = client;
       },

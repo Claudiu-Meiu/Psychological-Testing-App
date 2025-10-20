@@ -29,6 +29,18 @@ const PaSchmieschekClientSchema = new Schema({
     type: String,
     required: true,
   },
+  dateOfBirth: {
+    type: Date,
+    required: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
   answers: {
     type: Object,
     required: true,

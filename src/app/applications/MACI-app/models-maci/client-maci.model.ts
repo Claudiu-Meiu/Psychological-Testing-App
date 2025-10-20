@@ -1,9 +1,10 @@
 export interface ClientMaci {
   _id?: string;
   date: Date;
-  gender: string;
-  age: number;
   name: string;
+  dateOfBirth: Date | null;
+  age: number | null;
+  gender: string;
   answers: Record<string, string>;
   scores?: any;
 }

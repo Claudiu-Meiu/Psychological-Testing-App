@@ -20,8 +20,6 @@ import { ClientMaciService } from '../../services-maci/client-maci.service';
 
 import { type ClientMaci } from '../../models-maci/client-maci.model';
 
-import { PaginatorIntlService } from '../../../../services/overrides/paginatorIntl.service';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -29,11 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import {
-  MatPaginatorModule,
-  MatPaginator,
-  MatPaginatorIntl,
-} from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
 import {
   MAT_DIALOG_DATA,
@@ -45,6 +39,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-portal-maci',
@@ -62,8 +57,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatPaginatorModule,
     MatSortModule,
     MatTooltipModule,
+    MatDatepickerModule,
   ],
-  providers: [{ provide: MatPaginatorIntl, useClass: PaginatorIntlService }],
   templateUrl: './portal-maci.component.html',
 })
 export class PortalMaciComponent implements OnInit, AfterViewInit {
@@ -86,8 +81,8 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
   public displayedMaciTableColumns: string[] = [
     'delete',
     'name',
-    'gender',
     'age',
+    'gender',
     'date',
     'answers-scores',
   ];
@@ -122,9 +117,10 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
   private _addMaciClient(): void {
     const newClient: ClientMaci = {
       date: new Date(),
-      gender: this.clientMaciService.genderValue,
-      name: this.clientMaciService.nameValue,
-      age: this.clientMaciService.ageValue,
+      name: this.clientMaciService.name,
+      dateOfBirth: this.clientMaciService.dateOfBirth,
+      age: this.clientMaciService.age,
+      gender: this.clientMaciService.gender,
       answers: this._answersMaciService.generateEmptyAnswersObjectMaci(),
     };
 

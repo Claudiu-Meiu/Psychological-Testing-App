@@ -30,9 +30,26 @@
         >
           <div class="flex max-md:flex-col items-center gap-4">
             <mat-form-field appearance="outline">
+              <mat-label>Data nașterii</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [(ngModel)]="clientMcmi3Service.dateOfBirth"
+                name="dateOfBirth"
+                required
+              />
+              <mat-hint>Ziua / Luna / Anul</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
               <mat-label>Gen</mat-label>
               <mat-select
-                [(ngModel)]="clientMcmi3Service.genderValue"
+                [(ngModel)]="clientMcmi3Service.gender"
                 name="gender"
                 (selectionChange)="clientMcmi3Service.setGender($event.value)"
                 required
@@ -47,9 +64,8 @@
               <input
                 matInput
                 type="text"
-                [(ngModel)]="clientMcmi3Service.nameValue"
+                [(ngModel)]="clientMcmi3Service.name"
                 name="name"
-                [disabled]="!clientMcmi3Service.genderValue"
                 required
               />
             </mat-form-field>
@@ -59,9 +75,7 @@
             <button
               mat-flat-button
               type="submit"
-              [disabled]="
-                !mcmi3portalForm.valid || !clientMcmi3Service.genderValue
-              "
+              [disabled]="!mcmi3portalForm.valid"
             >
               Începe testul
             </button>
@@ -125,6 +139,22 @@
               Nume
             </th>
             <td mat-cell *matCellDef="let client">{{ client.name }}</td>
+          </ng-container>
+
+          <!-- Age Column -->
+          <ng-container matColumnDef="age">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              matTooltip="Sortează după vârstă"
+            >
+              Vârstă
+            </th>
+            <td mat-cell *matCellDef="let client">
+              {{ client.dateOfBirth | date : "dd/MM/yyyy" }} ({{ client.age }}
+              ani)
+            </td>
           </ng-container>
 
           <!-- Gender Column -->

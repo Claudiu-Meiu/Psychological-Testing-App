@@ -29,7 +29,33 @@
           #paschmieschekportalForm="ngForm"
         >
           <div class="flex max-md:flex-col items-center gap-4">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="w-full!">
+              <mat-label>Nume și Prenume</mat-label>
+              <input
+                matInput
+                type="text"
+                [(ngModel)]="clientPaSchmieschekService.name"
+                name="name"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full!">
+              <mat-label>Gen</mat-label>
+              <mat-select
+                [(ngModel)]="clientPaSchmieschekService.gender"
+                name="gender"
+                (selectionChange)="
+                  clientPaSchmieschekService.setGender($event.value)
+                "
+                required
+              >
+                <mat-option [value]="'Masculin'">Masculin</mat-option>
+                <mat-option [value]="'Feminin'">Feminin</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full!">
               <mat-label>Data nașterii</mat-label>
               <input
                 matInput
@@ -45,41 +71,13 @@
               ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Gen</mat-label>
-              <mat-select
-                [(ngModel)]="clientPaSchmieschekService.gender"
-                name="gender"
-                (selectionChange)="
-                  clientPaSchmieschekService.setGender($event.value)
-                "
-                required
-              >
-                <mat-option [value]="'Masculin'">Masculin</mat-option>
-                <mat-option [value]="'Feminin'">Feminin</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Nume și Prenume</mat-label>
-              <input
-                matInput
-                type="text"
-                [(ngModel)]="clientPaSchmieschekService.name"
-                name="name"
-                required
-              />
-            </mat-form-field>
           </div>
 
           <div class="flex items-center gap-4">
             <button
               mat-flat-button
               type="submit"
-              [disabled]="
-                !paschmieschekportalForm.valid
-              "
+              [disabled]="!paschmieschekportalForm.valid"
             >
               Începe testul
             </button>

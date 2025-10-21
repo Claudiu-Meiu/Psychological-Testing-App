@@ -1,7 +1,16 @@
 <div class="flex justify-end">
-  <button mat-icon-button (click)="toggleTheme()" class="theme-toggle-btn">
+  <button
+    mat-icon-button
+    (click)="toggleTheme()"
+    class="theme-toggle-btn"
+    [matTooltip]="
+      themeService.currentTheme === 'light'
+        ? 'Aplică tema întunecată'
+        : 'Aplică tema luminoasă'
+    "
+  >
     <mat-icon>
-      {{ themeService.currentTheme === "light" ? "light_mode" : "bedtime" }}
+      {{ themeService.currentTheme === "light" ? "bedtime" : "light_mode" }}
     </mat-icon>
   </button>
 </div>

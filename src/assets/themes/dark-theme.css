@@ -1,3 +1,8 @@
+body {
+  background-color: #18181b;
+  color: #fafafa;
+}
+
 .mat-ripple {
   overflow: hidden;
   position: relative;

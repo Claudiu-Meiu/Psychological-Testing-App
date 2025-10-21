@@ -29,7 +29,30 @@
           #maciPortalForm="ngForm"
         >
           <div class="flex max-md:flex-col items-center gap-4">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="w-full!">
+              <mat-label>Nume și Prenume</mat-label>
+              <input
+                matInput
+                [(ngModel)]="clientMaciService.name"
+                name="name"
+                required
+              />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full!">
+              <mat-label>Gen</mat-label>
+              <mat-select
+                [(ngModel)]="clientMaciService.gender"
+                name="gender"
+                (selectionChange)="clientMaciService.setGender($event.value)"
+                required
+              >
+                <mat-option [value]="'Masculin'">Masculin</mat-option>
+                <mat-option [value]="'Feminin'">Feminin</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full!">
               <mat-label>Data nașterii</mat-label>
               <input
                 matInput
@@ -44,29 +67,6 @@
                 [for]="picker"
               ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Gen</mat-label>
-              <mat-select
-                [(ngModel)]="clientMaciService.gender"
-                name="gender"
-                (selectionChange)="clientMaciService.setGender($event.value)"
-                required
-              >
-                <mat-option [value]="'Masculin'">Masculin</mat-option>
-                <mat-option [value]="'Feminin'">Feminin</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Nume și Prenume</mat-label>
-              <input
-                matInput
-                [(ngModel)]="clientMaciService.name"
-                name="name"
-                required
-              />
             </mat-form-field>
           </div>
 
@@ -149,9 +149,7 @@
               Vârstă
             </th>
             <td mat-cell *matCellDef="let client">
-              {{ client.dateOfBirth | date : "dd/MM/yyyy" }} ({{
-                client.age
-              }}
+              {{ client.dateOfBirth | date : "dd/MM/yyyy" }} ({{ client.age }}
               ani)
             </td>
           </ng-container>

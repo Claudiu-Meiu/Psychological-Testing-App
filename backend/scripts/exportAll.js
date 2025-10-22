@@ -1,11 +1,12 @@
-// backend/scripts/exportAll.js
 import fs from "fs";
 import path from "path";
+import os from "os";
+import { EJSON } from "bson";
 import { maciDb, mcmi3Db, paschmieschekDb } from "../config/mongoDb.js";
 
 export async function exportAllDatabases() {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const exportDir = path.join(process.cwd(), `mongo_exports_${timestamp}`);
+  const exportDir = path.join(os.tmpdir(), `mongo_exports_${timestamp}`);
   fs.mkdirSync(exportDir, { recursive: true });
 
   const dbs = [
@@ -16,16 +17,22 @@ export async function exportAllDatabases() {
 
   for (const { name, conn } of dbs) {
     await conn.asPromise();
+    const db = conn.db;
+    const collections = await db.listCollections().toArray();
 
-    const collections = await conn.db.listCollections().toArray();
     const dbFolder = path.join(exportDir, name);
     fs.mkdirSync(dbFolder, { recursive: true });
 
     for (const coll of collections) {
-      const docs = await conn.db.collection(coll.name).find().toArray();
+      const docs = await db.collection(coll.name).find().toArray();
+
+      const relaxedEjson = EJSON.stringify(docs, { relaxed: true });
+
+      const pretty = JSON.stringify(JSON.parse(relaxedEjson), null, 1);
+
       fs.writeFileSync(
-        path.join(dbFolder, `${coll.name}.json`),
-        JSON.stringify(docs, null, 2)
+        path.join(dbFolder, `${name}.${coll.name}.json`),
+        pretty + "\n"
       );
     }
   }

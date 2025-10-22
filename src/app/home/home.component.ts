@@ -4,10 +4,13 @@ import { Router } from '@angular/router';
 
 import { AppRoutes } from '../models/app-routes.enum';
 
+import { BackupService } from '../services/backup.service';
+
 import { MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +21,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MatCardModule,
   ],
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
   private _router = inject(Router);
+
+  private _backupService = inject(BackupService);
 
   public maciBtn(): Promise<boolean> {
     return this._router.navigate([AppRoutes.Maci]);
@@ -34,5 +40,23 @@ export class HomeComponent {
 
   public paSchmieschekBtn(): Promise<boolean> {
     return this._router.navigate([AppRoutes.PaSchmieschek]);
+  }
+
+  public exportBackup() {
+    this._backupService.downloadBackup().subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `psychological-testing-app-mongodb-backup-${new Date()
+          .toISOString()
+          .slice(0, 10)}.zip`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Backup export failed', err);
+      },
+    });
   }
 }

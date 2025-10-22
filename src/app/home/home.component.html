@@ -1,35 +1,44 @@
-<button (click)="exportBackup()">
-  Export Backup
-</button>
+<div class="flex flex-col m-auto gap-10 w-3/5">
+  <button mat-button (click)="exportBackup()">
+    <mat-icon>backup</mat-icon> Descarcă bazele de date
+  </button>
 
-<div class="flex flex-col items-center justify-center h-screen">
-  <div class="flex flex-col gap-10">
-    <div
-      class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue dark:hover:text-material-light-blue"
-      (click)="maciBtn()"
-      matTooltip="Deschide MACI"
-      matTooltipPosition="above"
-    >
-      <div class="text-6xl">MACI</div>
-      <mat-icon fontIcon="launch"></mat-icon>
-    </div>
-    <div
-      class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue dark:hover:text-material-light-blue"
-      (click)="mcmi3Btn()"
-      matTooltip="Deschide MCMI-III"
-      matTooltipPosition="above"
-    >
-      <div class="text-6xl">MCMI-III</div>
-      <mat-icon fontIcon="launch"></mat-icon>
-    </div>
-    <div
-      class="flex items-center gap-2 cursor-pointer p-10 hover:text-material-blue dark:hover:text-material-light-blue"
-      (click)="paSchmieschekBtn()"
-      matTooltip="Deschide P.A Schmieschek"
-      matTooltipPosition="above"
-    >
-      <div class="text-6xl">P.A Schmieschek</div>
-      <mat-icon fontIcon="launch"></mat-icon>
-    </div>
-  </div>
+  <mat-card appearance="outlined" class="p-4">
+    <mat-card-content>
+      <div class="flex flex-col">
+        <header class="text-4xl">MACI</header>
+        <p>Inventarul Clinic Millon pentru adolescenți</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="flex justify-end">
+      <button mat-flat-button (click)="maciBtn()">Deschide</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="p-4">
+    <mat-card-content>
+      <div class="flex flex-col">
+        <header class="text-4xl">MCMI-III</header>
+        <p>Inventarul Clinic Multiaxial Millon</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="flex justify-end">
+      <button mat-flat-button (click)="mcmi3Btn()">Deschide</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="p-4">
+    <mat-card-content>
+      <div class="flex flex-col">
+        <header class="text-4xl">EXPLORAREA “PERSONALITĂŢII ACCENTUATE”</header>
+        <p>Chestionar eleborat de H. Schmieschek</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="flex justify-end">
+      <button mat-flat-button (click)="paSchmieschekBtn()">Deschide</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

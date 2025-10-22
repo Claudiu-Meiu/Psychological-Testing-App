@@ -81,12 +81,12 @@ export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
     new MatTableDataSource<ClientPaSchmieschek>();
 
   public displayedPaSchmieschekTableColumns: string[] = [
-    'delete',
     'name',
     'age',
     'gender',
     'date',
     'answers-scores',
+    'delete',
   ];
 
   ngOnInit(): void {

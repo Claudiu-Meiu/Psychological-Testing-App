@@ -86,12 +86,12 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
     new MatTableDataSource<ClientMcmi3>();
 
   public displayedMcmi3TableColumns: string[] = [
-    'delete',
     'name',
     'age',
     'gender',
     'date',
     'answers-scores',
+    'delete',
   ];
 
   ngOnInit(): void {

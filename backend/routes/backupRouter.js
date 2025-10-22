@@ -10,7 +10,7 @@ router.get("/export", async (req, res) => {
   try {
     const folder = await exportAllDatabases();
 
-    const archiveName = `mongodb-backup-${new Date()
+    const archiveName = `psychological-testing-app-mongodb-backup-${new Date()
       .toISOString()
       .slice(0, 10)}.zip`;
     const archivePath = path.join(process.cwd(), archiveName);

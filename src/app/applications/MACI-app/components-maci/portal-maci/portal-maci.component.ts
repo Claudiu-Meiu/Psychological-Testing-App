@@ -79,12 +79,12 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
     new MatTableDataSource<ClientMaci>();
 
   public displayedMaciTableColumns: string[] = [
-    'delete',
     'name',
     'age',
     'gender',
     'date',
     'answers-scores',
+    'delete',
   ];
 
   ngOnInit(): void {

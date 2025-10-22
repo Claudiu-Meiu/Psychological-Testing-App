@@ -114,22 +114,6 @@
         </mat-form-field>
 
         <table mat-table [dataSource]="allPaSchmieschekClients" matSort>
-          <!-- Delete client Column -->
-          <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let client">
-              <button
-                mat-icon-button
-                (click)="
-                  openDeletePaSchmieschekClientDialog(client, '0ms', '0ms')
-                "
-                matTooltip="Șterge client"
-              >
-                <mat-icon fontIcon="delete_forever"></mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th
@@ -195,18 +179,36 @@
             <td mat-cell *matCellDef="let client">
               <div class="flex items-center gap-2 justify-end">
                 <button
-                  mat-button
+                  mat-flat-button
                   (click)="selectClient(client); viewAnswers()"
                 >
                   <mat-icon>assignment</mat-icon>Răspunsuri
                 </button>
 
                 <button
-                  mat-button
+                  mat-flat-button
                   *ngIf="client.scores.length !== 0"
                   (click)="selectClient(client); viewResults()"
                 >
                   <mat-icon>assignment_turned_in</mat-icon>Scoruri
+                </button>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Delete client Column -->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let client">
+              <div class="flex items-center gap-2 justify-end">
+                <button
+                  mat-icon-button
+                  (click)="
+                    openDeletePaSchmieschekClientDialog(client, '0ms', '0ms')
+                  "
+                  matTooltip="Șterge client"
+                >
+                  <mat-icon fontIcon="delete_forever"></mat-icon>
                 </button>
               </div>
             </td>

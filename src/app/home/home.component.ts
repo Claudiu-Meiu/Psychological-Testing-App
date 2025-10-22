@@ -48,7 +48,7 @@ export class HomeComponent {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `mongodb-backup-${new Date()
+        a.download = `psychological-testing-app-mongodb-backup-${new Date()
           .toISOString()
           .slice(0, 10)}.zip`;
         a.click();

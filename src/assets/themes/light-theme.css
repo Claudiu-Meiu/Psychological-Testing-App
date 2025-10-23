@@ -898,7 +898,7 @@ html {
   --mdc-text-button-label-text-tracking: 0.006rem;
   --mdc-text-button-label-text-weight: 500;
   --mdc-text-button-container-height: 40px;
-  --mdc-text-button-container-shape: 10px;
+  --mdc-text-button-container-shape: 5px;
   --mdc-protected-button-container-elevation-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   --mdc-protected-button-disabled-container-elevation-shadow: 0px 0px 0px 0px
@@ -919,7 +919,7 @@ html {
   --mdc-protected-button-label-text-tracking: 0.006rem;
   --mdc-protected-button-label-text-weight: 500;
   --mdc-protected-button-container-height: 40px;
-  --mdc-protected-button-container-shape: 10px;
+  --mdc-protected-button-container-shape: 5px;
   --mdc-filled-button-container-color: #005cbb;
   --mdc-filled-button-label-text-color: #ffffff;
   --mdc-filled-button-disabled-container-color: rgba(26, 27, 31, 0.12);
@@ -929,7 +929,7 @@ html {
   --mdc-filled-button-label-text-tracking: 0.006rem;
   --mdc-filled-button-label-text-weight: 500;
   --mdc-filled-button-container-height: 40px;
-  --mdc-filled-button-container-shape: 10px;
+  --mdc-filled-button-container-shape: 5px;
   --mdc-outlined-button-disabled-outline-color: rgba(26, 27, 31, 0.12);
   --mdc-outlined-button-disabled-label-text-color: rgba(26, 27, 31, 0.38);
   --mdc-outlined-button-label-text-color: #005cbb;
@@ -940,7 +940,7 @@ html {
   --mdc-outlined-button-label-text-weight: 500;
   --mdc-outlined-button-container-height: 40px;
   --mdc-outlined-button-outline-width: 1px;
-  --mdc-outlined-button-container-shape: 10px;
+  --mdc-outlined-button-container-shape: 5px;
   --mat-text-button-state-layer-color: #005cbb;
   --mat-text-button-disabled-state-layer-color: #44474e;
   --mat-text-button-ripple-color: rgba(0, 92, 187, 0.12);

@@ -85,4 +85,26 @@ router.delete("/clients/:id", async (req, res) => {
   }
 });
 
+// API route to edit a specific client's information in the paschmieschek database
+router.put("/clients/:id", async (req, res) => {
+  const clientId = req.params.id;
+  const updatedData = req.body;
+
+  try {
+    const client = await PaSchmieschekClient.findByIdAndUpdate(
+      clientId,
+      updatedData,
+      { new: true, runValidators: true }
+    );
+
+    if (!client) {
+      return res.status(404).json({ message: "Client not found" });
+    }
+
+    res.status(200).json(client);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 export default router;

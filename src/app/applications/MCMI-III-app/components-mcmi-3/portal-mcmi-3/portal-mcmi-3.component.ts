@@ -266,20 +266,22 @@ export class EditMcmi3ClientDialog {
 
   public updateAge(): void {
     const dob = this.data.client.dateOfBirth;
-    if (!dob) {
+    const td = this.data.client.date;
+
+    if (!dob || !td) {
       this.data.client.age = undefined as any;
       return;
     }
 
     const birthDate = dob instanceof Date ? dob : new Date(dob);
-    const today = new Date();
+    const testDate = td instanceof Date ? td : new Date(td);
 
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
+    let age = testDate.getFullYear() - birthDate.getFullYear();
+    const monthDiff = testDate.getMonth() - birthDate.getMonth();
 
     if (
       monthDiff < 0 ||
-      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+      (monthDiff === 0 && testDate.getDate() < birthDate.getDate())
     ) {
       age--;
     }

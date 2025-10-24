@@ -38,6 +38,7 @@
         matInput
         [matDatepicker]="datePicker"
         [(ngModel)]="data.client.date"
+        (ngModelChange)="updateAge()"
         name="date"
         required
       />

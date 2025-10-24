@@ -39,6 +39,16 @@ export class MongoDbMcmi3Service {
     );
   }
 
+  public editClient(
+    clientId: string | undefined,
+    updatedData: Partial<ClientMcmi3>
+  ): Observable<ClientMcmi3> {
+    return this._http.put<ClientMcmi3>(
+      `${this._apiUrl}/${clientId}`,
+      updatedData
+    );
+  }
+
   public deleteClient(clientId: string | undefined): Observable<string> {
     return this._http.delete<string>(`${this._apiUrl}/${clientId}`);
   }

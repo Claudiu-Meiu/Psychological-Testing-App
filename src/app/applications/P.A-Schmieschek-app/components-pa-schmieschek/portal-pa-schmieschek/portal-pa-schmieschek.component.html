@@ -196,19 +196,34 @@
             </td>
           </ng-container>
 
-          <!-- Delete client Column -->
-          <ng-container matColumnDef="delete">
+          <!-- Edit / Delete client Column -->
+          <ng-container matColumnDef="edit-delete">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let client">
               <div class="flex items-center gap-2 justify-end">
                 <button
                   mat-icon-button
                   (click)="
-                    openDeletePaSchmieschekClientDialog(client, '0ms', '0ms')
+                    openEditPaSchmieschekClientDialog(client, '200ms', '200ms')
                   "
-                  matTooltip="Șterge client"
+                  matTooltip="Editează"
                 >
-                  <mat-icon fontIcon="delete_forever"></mat-icon>
+                  <mat-icon>edit_document</mat-icon>
+                </button>
+
+                <button
+                  mat-icon-button
+                  (click)="
+                    openDeletePaSchmieschekClientDialog(
+                      client,
+                      '200ms',
+                      '200ms'
+                    )
+                  "
+                  matTooltip="Șterge"
+                  class="hover:text-red-600! dark:hover:text-red-400!"
+                >
+                  <mat-icon>delete_forever</mat-icon>
                 </button>
               </div>
             </td>

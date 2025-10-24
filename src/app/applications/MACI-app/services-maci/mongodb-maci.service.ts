@@ -39,6 +39,16 @@ export class MongoDbMaciService {
     );
   }
 
+  public editClient(
+    clientId: string | undefined,
+    updatedData: Partial<ClientMaci>
+  ): Observable<ClientMaci> {
+    return this._http.put<ClientMaci>(
+      `${this._apiUrl}/${clientId}`,
+      updatedData
+    );
+  }
+
   public deleteClient(clientId: string | undefined): Observable<string> {
     return this._http.delete<string>(`${this._apiUrl}/${clientId}`);
   }

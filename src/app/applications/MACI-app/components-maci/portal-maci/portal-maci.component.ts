@@ -84,7 +84,7 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
     'gender',
     'date',
     'answers-scores',
-    'delete',
+    'edit-delete',
   ];
 
   ngOnInit(): void {
@@ -146,19 +146,6 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
       this._answersMaciService.getAnswers();
   }
 
-  public deleteClient(clientId: string): void {
-    this._mongoDbMaciService.deleteClient(clientId).subscribe({
-      next: () => {
-        this.allMaciClients.data = this.allMaciClients.data.filter(
-          (selectedClient: ClientMaci) => selectedClient._id !== clientId
-        );
-      },
-      error: (error) => {
-        console.error('Error deleting client:', error);
-      },
-    });
-  }
-
   public onSubmit(): void {
     this._addMaciClient();
     this._testMaciService.startTestBtn();
@@ -180,23 +167,114 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
     return this._router.navigate([AppRoutes.Home]);
   }
 
+  public openEditMaciClientDialog(
+    client: ClientMaci,
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    const dialogRef = this.dialog.open(EditMaciClientDialog, {
+      width: '400px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: { client: { ...client } },
+    });
+
+    dialogRef.afterClosed().subscribe((updatedClient) => {
+      if (updatedClient) {
+        this._mongoDbMaciService
+          .editClient(updatedClient._id!, updatedClient)
+          .subscribe({
+            next: (res) => {
+              const index = this.allMaciClients.data.findIndex(
+                (c) => c._id === res._id
+              );
+              if (index !== -1) {
+                this.allMaciClients.data[index] = res;
+                this.allMaciClients._updateChangeSubscription();
+              }
+            },
+            error: (error) => console.error('Error updating client:', error),
+          });
+      }
+    });
+  }
+
   public openDeleteMaciClientDialog(
     client: ClientMaci,
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
     const dialogRef = this.dialog.open(DeleteMaciClientDialog, {
-      width: '350px',
+      width: '400px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: { client },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteClient(client._id!);
+    dialogRef.afterClosed().subscribe((deletedClient) => {
+      if (deletedClient) {
+        this._mongoDbMaciService.deleteClient(client._id).subscribe({
+          next: () => {
+            this.allMaciClients.data = this.allMaciClients.data.filter(
+              (selectedClient: ClientMaci) => selectedClient._id !== client._id
+            );
+          },
+          error: (error) => {
+            console.error('Error deleting client:', error);
+          },
+        });
       }
     });
+  }
+}
+
+@Component({
+  selector: 'edit-maci-client-dialog',
+  templateUrl: './edit-maci-client-dialog.html',
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDatepickerModule,
+  ],
+})
+export class EditMaciClientDialog {
+  constructor(
+    readonly dialogRef: MatDialogRef<EditMaciClientDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: { client: ClientMaci }
+  ) {}
+
+  public saveChanges(): void {
+    this.dialogRef.close(this.data.client);
+  }
+
+  public updateAge(): void {
+    const dob = this.data.client.dateOfBirth;
+    if (!dob) {
+      this.data.client.age = undefined as any;
+      return;
+    }
+
+    const birthDate = dob instanceof Date ? dob : new Date(dob);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    this.data.client.age = age;
   }
 }
 

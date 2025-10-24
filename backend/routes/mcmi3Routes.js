@@ -66,6 +66,27 @@ router.put("/clients/:id/scores", async (req, res) => {
   }
 });
 
+// API route to edit a specific client's information in the mcmi3 database
+router.put("/clients/:id", async (req, res) => {
+  const clientId = req.params.id;
+  const updatedData = req.body;
+
+  try {
+    const client = await Mcmi3Client.findByIdAndUpdate(clientId, updatedData, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!client) {
+      return res.status(404).json({ message: "Client not found" });
+    }
+
+    res.status(200).json(client);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 // API route to delete a specific client in the mcmi3 database
 router.delete("/clients/:id", async (req, res) => {
   const clientId = req.params.id;

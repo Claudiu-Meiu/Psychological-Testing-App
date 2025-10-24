@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Editează</h2>
+<mat-dialog-content>
+  <form #editForm="ngForm" class="flex flex-col gap-4 p-2">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nume</mat-label>
+      <input matInput required [(ngModel)]="data.client.name" name="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full!">
+      <mat-label>Data nașterii</mat-label>
+      <input
+        matInput
+        [matDatepicker]="dobPicker"
+        [(ngModel)]="data.client.dateOfBirth"
+        (ngModelChange)="updateAge()"
+        name="dateOfBirth"
+        required
+      />
+      <mat-hint>Ziua / Luna / Anul</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="dobPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #dobPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Gen</mat-label>
+      <mat-select required [(ngModel)]="data.client.gender" name="gender">
+        <mat-option value="Masculin">Masculin</mat-option>
+        <mat-option value="Feminin">Feminin</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full!">
+      <mat-label>Dată</mat-label>
+      <input
+        matInput
+        [matDatepicker]="datePicker"
+        [(ngModel)]="data.client.date"
+        name="date"
+        required
+      />
+      <mat-hint>Ziua / Luna / Anul</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="datePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Anulează</button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="saveChanges()"
+    [disabled]="!editForm.valid"
+  >
+    Salvează
+  </button>
+</mat-dialog-actions>

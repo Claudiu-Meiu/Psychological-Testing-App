@@ -41,10 +41,6 @@ export class MongoDbPaSchmieschekService {
     );
   }
 
-  public deleteClient(clientId: string | undefined): Observable<string> {
-    return this._http.delete<string>(`${this._apiUrl}/${clientId}`);
-  }
-
   public editClient(
     clientId: string | undefined,
     updatedData: Partial<ClientPaSchmieschek>
@@ -53,5 +49,9 @@ export class MongoDbPaSchmieschekService {
       `${this._apiUrl}/${clientId}`,
       updatedData
     );
+  }
+
+  public deleteClient(clientId: string | undefined): Observable<string> {
+    return this._http.delete<string>(`${this._apiUrl}/${clientId}`);
   }
 }

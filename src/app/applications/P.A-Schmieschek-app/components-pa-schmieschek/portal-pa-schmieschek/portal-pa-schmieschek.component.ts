@@ -155,21 +155,6 @@ export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
       this._answersPaSchmieschekService.getAnswers();
   }
 
-  public deleteClient(clientId: string): void {
-    this._mongoDbPaSchmieschekService.deleteClient(clientId).subscribe({
-      next: () => {
-        this.allPaSchmieschekClients.data =
-          this.allPaSchmieschekClients.data.filter(
-            (selectedClient: ClientPaSchmieschek) =>
-              selectedClient._id !== clientId
-          );
-      },
-      error: (error) => {
-        console.error('Error deleting client:', error);
-      },
-    });
-  }
-
   public onSubmit(): void {
     this._addPaSchmieschekClient();
     this._testPaSchmieschekService.startTestBtn();
@@ -217,7 +202,7 @@ export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
                 this.allPaSchmieschekClients._updateChangeSubscription();
               }
             },
-            error: (err) => console.error('Error updating client:', err),
+            error: (error) => console.error('Error updating client:', error),
           });
       }
     });
@@ -235,9 +220,20 @@ export class PortalPaSchmieschekComponent implements OnInit, AfterViewInit {
       data: { client },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteClient(client._id!);
+    dialogRef.afterClosed().subscribe((deletedClient) => {
+      if (deletedClient) {
+        this._mongoDbPaSchmieschekService.deleteClient(client._id).subscribe({
+          next: () => {
+            this.allPaSchmieschekClients.data =
+              this.allPaSchmieschekClients.data.filter(
+                (selectedClient: ClientPaSchmieschek) =>
+                  selectedClient._id !== client._id
+              );
+          },
+          error: (error) => {
+            console.error('Error deleting client:', error);
+          },
+        });
       }
     });
   }

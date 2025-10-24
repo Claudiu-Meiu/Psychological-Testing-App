@@ -66,25 +66,6 @@ router.put("/clients/:id/scores", async (req, res) => {
   }
 });
 
-// API route to delete a specific client in the paschmieschek database
-router.delete("/clients/:id", async (req, res) => {
-  const clientId = req.params.id;
-
-  try {
-    const deletedClient = await PaSchmieschekClient.findByIdAndDelete(clientId);
-
-    if (!deletedClient) {
-      return res.status(404).json({ message: "Client not found" });
-    }
-
-    res
-      .status(200)
-      .json({ message: "Client deleted successfully", client: deletedClient });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 // API route to edit a specific client's information in the paschmieschek database
 router.put("/clients/:id", async (req, res) => {
   const clientId = req.params.id;
@@ -104,6 +85,25 @@ router.put("/clients/:id", async (req, res) => {
     res.status(200).json(client);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+// API route to delete a specific client in the paschmieschek database
+router.delete("/clients/:id", async (req, res) => {
+  const clientId = req.params.id;
+
+  try {
+    const deletedClient = await PaSchmieschekClient.findByIdAndDelete(clientId);
+
+    if (!deletedClient) {
+      return res.status(404).json({ message: "Client not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Client deleted successfully", client: deletedClient });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 

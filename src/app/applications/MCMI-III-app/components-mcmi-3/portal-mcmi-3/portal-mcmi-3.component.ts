@@ -91,7 +91,7 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
     'gender',
     'date',
     'answers-scores',
-    'delete',
+    'edit-delete',
   ];
 
   ngOnInit(): void {
@@ -156,19 +156,6 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
       this._answersMcmi3Service.getAnswers();
   }
 
-  public deleteClient(clientId: string): void {
-    this._mongoDbMcmi3Service.deleteClient(clientId).subscribe({
-      next: () => {
-        this.allMcmi3Clients.data = this.allMcmi3Clients.data.filter(
-          (selectedClient: ClientMcmi3) => selectedClient._id !== clientId
-        );
-      },
-      error: (error) => {
-        console.error('Error deleting client:', error);
-      },
-    });
-  }
-
   public onSubmit(): void {
     this._addMcmi3Client();
     this._testMcmi3Service.startTestBtn();
@@ -190,23 +177,114 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
     return this._router.navigate([AppRoutes.Home]);
   }
 
+  public openEditMcmi3ClientDialog(
+    client: ClientMcmi3,
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    const dialogRef = this.dialog.open(EditMcmi3ClientDialog, {
+      width: '400px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: { client: { ...client } },
+    });
+
+    dialogRef.afterClosed().subscribe((updatedClient) => {
+      if (updatedClient) {
+        this._mongoDbMcmi3Service
+          .editClient(updatedClient._id!, updatedClient)
+          .subscribe({
+            next: (res) => {
+              const index = this.allMcmi3Clients.data.findIndex(
+                (c) => c._id === res._id
+              );
+              if (index !== -1) {
+                this.allMcmi3Clients.data[index] = res;
+                this.allMcmi3Clients._updateChangeSubscription();
+              }
+            },
+            error: (error) => console.error('Error updating client:', error),
+          });
+      }
+    });
+  }
+
   public openDeleteMcmi3ClientDialog(
     client: ClientMcmi3,
     enterAnimationDuration: string,
     exitAnimationDuration: string
   ): void {
     const dialogRef = this.dialog.open(DeleteMcmi3ClientDialog, {
-      width: '350px',
+      width: '400px',
       enterAnimationDuration,
       exitAnimationDuration,
       data: { client },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.deleteClient(client._id!);
+    dialogRef.afterClosed().subscribe((deletedClient) => {
+      if (deletedClient) {
+        this._mongoDbMcmi3Service.deleteClient(client._id).subscribe({
+          next: () => {
+            this.allMcmi3Clients.data = this.allMcmi3Clients.data.filter(
+              (selectedClient: ClientMcmi3) => selectedClient._id !== client._id
+            );
+          },
+          error: (error) => {
+            console.error('Error deleting client:', error);
+          },
+        });
       }
     });
+  }
+}
+
+@Component({
+  selector: 'edit-mcmi-3-client-dialog',
+  templateUrl: './edit-mcmi-3-client-dialog.html',
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDatepickerModule,
+  ],
+})
+export class EditMcmi3ClientDialog {
+  constructor(
+    readonly dialogRef: MatDialogRef<EditMcmi3ClientDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: { client: ClientMcmi3 }
+  ) {}
+
+  public saveChanges(): void {
+    this.dialogRef.close(this.data.client);
+  }
+
+  public updateAge(): void {
+    const dob = this.data.client.dateOfBirth;
+    if (!dob) {
+      this.data.client.age = undefined as any;
+      return;
+    }
+
+    const birthDate = dob instanceof Date ? dob : new Date(dob);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    this.data.client.age = age;
   }
 }
 

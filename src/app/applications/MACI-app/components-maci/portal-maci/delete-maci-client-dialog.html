@@ -1,8 +1,15 @@
-<header mat-dialog-title>Șterge Client</header>
+<div class="flex items-center gap-2 p-6">
+  <mat-icon>delete_forever</mat-icon>
+  <header class="text-2xl">Șterge Client</header>
+</div>
+
 <mat-dialog-content>
-    Doești să ștergi clientul: <b>{{ data.client.name }}</b>?
+  Doești să ștergi clientul: <b>{{ data.client.name }}</b>?
 </mat-dialog-content>
+
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Nu</button>
-    <button mat-button (click)="confirmDelete()" cdkFocusInitial>Da</button>
+  <button mat-button mat-dialog-close>Anulează</button>
+  <button mat-flat-button (click)="confirmDelete()" cdkFocusInitial>
+    Șterge
+  </button>
 </mat-dialog-actions>

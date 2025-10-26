@@ -246,7 +246,7 @@ export class PortalMcmi3Component implements OnInit, AfterViewInit {
     FormsModule,
     MatDialogActions,
     MatDialogClose,
-    MatDialogTitle,
+    MatIconModule,
     MatDialogContent,
     MatInputModule,
     MatSelectModule,
@@ -298,7 +298,7 @@ export class EditMcmi3ClientDialog {
     MatButtonModule,
     MatDialogActions,
     MatDialogClose,
-    MatDialogTitle,
+    MatIconModule,
     MatDialogContent,
   ],
 })

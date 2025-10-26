@@ -236,7 +236,7 @@ export class PortalMaciComponent implements OnInit, AfterViewInit {
     FormsModule,
     MatDialogActions,
     MatDialogClose,
-    MatDialogTitle,
+    MatIconModule,
     MatDialogContent,
     MatInputModule,
     MatSelectModule,
@@ -288,7 +288,7 @@ export class EditMaciClientDialog {
     MatButtonModule,
     MatDialogActions,
     MatDialogClose,
-    MatDialogTitle,
+    MatIconModule,
     MatDialogContent,
   ],
 })

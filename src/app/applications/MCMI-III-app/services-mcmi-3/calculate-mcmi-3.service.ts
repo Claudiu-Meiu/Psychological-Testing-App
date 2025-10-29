@@ -722,7 +722,7 @@ export class CalculateMcmi3Service {
     });
     falseItems.forEach((item) => {
       if (item === 'F') {
-        this._resultScale2AGross += 1;
+        this._resultScale3Gross += 1;
       }
     });
 
